@@ -33,10 +33,10 @@ npm run serve
 
 ## Перед публикацией
 
-В `scripts/build-site.mjs` замените:
+В `scripts/build-site.mjs` при необходимости замените:
 
 - `baseUrl` на рабочий домен;
-- `phone`, `phoneHref`, `email` на реальные контакты;
+- `phone`, `phoneHref`, `email`, `streetAddress` на актуальные контакты;
 - hero-видео на собственный ролик пескоструйной очистки, если есть фирменная съемка.
 
 Формы подготовлены для Netlify Forms (`data-netlify="true"`) и используют `multipart/form-data` для загрузки фото объекта.

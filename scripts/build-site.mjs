@@ -4,9 +4,12 @@ import path from "node:path";
 const root = path.resolve(process.cwd());
 const dist = path.join(root, "dist");
 const baseUrl = "https://tehochistka.ru";
-const phone = "+7 (495) 000-00-00";
-const phoneHref = "tel:+74950000000";
-const email = "zayavka@tehochistka.ru";
+const phone = "+7 (916) 265-92-62";
+const phoneHref = "tel:+79162659262";
+const email = "tehochistka@mail.ru";
+const streetAddress = "32-й км МКАД, владение 15";
+const addressLocality = "Москва";
+const fullAddress = `${addressLocality}, ${streetAddress}`;
 
 const images = {
   hero: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=82",
@@ -124,6 +127,8 @@ function localBusinessSchema() {
     })),
     address: {
       "@type": "PostalAddress",
+      streetAddress,
+      addressLocality,
       addressRegion: "Московская область",
       addressCountry: "RU",
     },
@@ -240,6 +245,7 @@ function footer() {
           <strong>Контакты</strong>
           <a href="${phoneHref}">${phone}</a>
           <a href="mailto:${email}">${email}</a>
+          <span>${fullAddress}</span>
           <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
@@ -429,7 +435,7 @@ function contactCta(context) {
           <span class="eyebrow">Заявка</span>
           <h2>Пришлите фото объекта — рассчитаем стоимость пескоструя</h2>
           <p class="lead">Укажите город, материал, примерную площадь и что нужно удалить: ржавчину, краску, высолы, копоть или старый лак.</p>
-          <p class="muted">Телефон: <a href="${phoneHref}">${phone}</a><br>Email: <a href="mailto:${email}">${email}</a></p>
+          <p class="muted">Телефон: <a href="${phoneHref}">${phone}</a><br>Email: <a href="mailto:${email}">${email}</a><br>Адрес: ${fullAddress}</p>
         </div>
         <div class="form-card card-pad">${leadForm(context)}</div>
       </div>

@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-site.mjs",
+    "dev": "npm run serve",
+    "start": "npm run serve",
     "serve": "python3 -m http.server 4173 --directory dist"
   },
   "engines": {

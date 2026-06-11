@@ -24,6 +24,13 @@ npm run serve
 
 После сборки готовый сайт находится в папке `dist`.
 
+## Деплой
+
+- Netlify: конфигурация уже задана в `netlify.toml`, publish directory — `dist`.
+- Vercel: конфигурация уже задана в `vercel.json`, output directory — `dist`.
+- Любой статический хостинг: в качестве корня сайта нужно публиковать папку `dist`, а не корень репозитория.
+- GitHub Pages без отдельного workflow не читает `dist` как корень сайта автоматически; для Pages нужно настроить GitHub Actions или публиковать содержимое `dist`.
+
 ## Перед публикацией
 
 В `scripts/build-site.mjs` замените:

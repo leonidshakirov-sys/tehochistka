@@ -17,25 +17,24 @@ const baseUrl = (cliOptions["base-url"] || process.env.SITE_BASE_URL || "https:/
 const dist = path.join(root, outputDir);
 const phone = "+7 (916) 265-92-62";
 const phoneHref = "tel:+79162659262";
+const whatsappHref = "https://wa.me/79162659262";
 const email = "tehochistka@mail.ru";
 const streetAddress = "32-й км МКАД, владение 15";
 const addressLocality = "Москва";
 const fullAddress = `${addressLocality}, ${streetAddress}`;
 
 const images = {
-  hero: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=82",
-  metal: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=82",
-  facade: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=82",
+  hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sandblasting_with_protective_gear_(9245784107).jpg",
+  metal: "https://commons.wikimedia.org/wiki/Special:FilePath/Sandblasting_with_protective_gear_(9245784107).jpg",
+  facade: "https://images.unsplash.com/photo-1777984947115-05de206fd91d?auto=format&fit=crop&w=1200&q=82",
   wood: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=82",
   hangar: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=82",
   fence: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=82",
-  height: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=82",
-  compressor: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=82",
+  height: "https://images.unsplash.com/photo-1777984947115-05de206fd91d?auto=format&fit=crop&w=1200&q=82",
+  compressor: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=82",
   before: "https://images.unsplash.com/photo-1516216628859-9bccecab13ca?auto=format&fit=crop&w=1000&q=80",
-  after: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80",
+  after: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=82",
 };
-
-const heroVideo = "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a9/Angle_Grinder_cutting_a_steel_chain_-_Video.webm/Angle_Grinder_cutting_a_steel_chain_-_Video.webm.360p.webm";
 
 const cities = [
   ["domodedovo", "Домодедово"],
@@ -64,7 +63,7 @@ const services = [
     image: images.metal,
     description: "Удаление ржавчины, окалины, старой краски и подготовка металлоконструкций к грунту и окраске.",
     keywords: "пескоструйная обработка металла, удаление ржавчины, пескоструй Московская область",
-    bullets: ["фермы, балки, швеллер, трубы и закладные", "ангары, ворота, заборы и емкости", "степень очистки под грунт, эмаль или огнезащиту"],
+    bullets: ["фермы, балки, швеллер, трубы и закладные", "ангары, ворота, заборы и емкости", "подготовка поверхности под грунт, эмаль или огнезащиту"],
   },
   {
     slug: "facades",
@@ -72,7 +71,7 @@ const services = [
     nav: "Фасады",
     path: "/services/facades.html",
     image: images.facade,
-    description: "Деликатная абразивная очистка кирпича, бетона, натурального камня и промышленных фасадов.",
+    description: "Аккуратная абразивная очистка кирпича, бетона, натурального камня и промышленных фасадов.",
     keywords: "очистка фасада, очистка кирпича, пескоструй Чехов, пескоструй Домодедово",
     bullets: ["снятие высолов, сажи, краски и цементного налета", "работа на высоте и локальная защита окон", "подбор фракции под состояние кладки"],
   },
@@ -285,10 +284,13 @@ function leadForm(context = "Общая заявка") {
     .replaceAll(/[^a-zа-яё0-9]+/giu, "-")
     .replaceAll(/^-|-$/g, "");
 
-  return `<form class="form-grid" name="lead" method="POST" action="${sitePath("/thanks.html")}" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
-    <input type="hidden" name="form-name" value="lead">
+  return `<form class="form-grid" name="lead" method="POST" action="https://formsubmit.co/${email}" enctype="multipart/form-data" data-lead-form>
+    <input type="hidden" name="_subject" value="Новая заявка с сайта Техочистка">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="${canonical("/thanks.html")}">
     <input type="hidden" name="page" value="${esc(context)}">
-    <p style="display:none"><label>Не заполняйте это поле <input name="bot-field"></label></p>
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="form-honey">
     <div class="field">
       <label for="name-${fieldId}">Имя</label>
       <input id="name-${fieldId}" name="name" autocomplete="name" placeholder="Как к вам обращаться" required>
@@ -299,15 +301,18 @@ function leadForm(context = "Общая заявка") {
     </div>
     <div class="field">
       <label for="photo-${fieldId}">Загрузить фото объекта</label>
-      <input id="photo-${fieldId}" name="photos" type="file" accept="image/*" multiple>
-      <small class="muted" data-file-note>Можно приложить фото металла, фасада, кирпича или дерева.</small>
+      <input id="photo-${fieldId}" name="attachment" type="file" accept="image/*">
+      <small class="muted" data-file-note>Приложите одно фото до 5 МБ. Если фото тяжелое, отправьте его в WhatsApp.</small>
     </div>
     <div class="field">
       <label for="message-${fieldId}">Комментарий</label>
       <textarea id="message-${fieldId}" name="message" placeholder="Материал, площадь, город, что нужно удалить"></textarea>
     </div>
-    <button class="button button-primary" type="submit">Рассчитать стоимость</button>
-    <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку данных для подготовки расчета.</p>
+    <div class="form-actions">
+      <button class="button button-primary" type="submit">Отправить заявку</button>
+      <a class="button button-secondary" href="${whatsappHref}" target="_blank" rel="noopener">Фото в WhatsApp</a>
+    </div>
+    <p class="form-note">Заявка отправляется на ${email}. При первой отправке FormSubmit может попросить подтвердить адрес получателя.</p>
   </form>`;
 }
 
@@ -320,15 +325,15 @@ function breadcrumbs(items) {
 function advantages() {
   const items = [
     ["01", "Выездная бригада", "Работаем на объекте: ангары, фасады, заборы, металлоконструкции и деревянные дома."],
-    ["02", "Подбор абразива", "Настраиваем давление, фракцию и производительность под металл, кирпич или дерево."],
-    ["03", "Подготовка под покрытие", "Получаем чистую поверхность под грунт, ЛКМ, огнезащиту, масло или антисептик."],
-    ["04", "Расчет по фото", "Быстро оцениваем площадь, сложность доступа, загрязнение и логистику по Москве и области."],
+    ["02", "Подбор абразива", "Настраиваем давление, фракцию и производительность под металл, кирпич, бетон или дерево."],
+    ["03", "Готовим под покрытие", "Получаем поверхность под грунт, краску, огнезащиту, масло или антисептик."],
+    ["04", "Расчет по фото", "Оцениваем площадь, доступ, загрязнение и выезд по Москве и Московской области."],
   ];
   return `<section class="section" id="advantages">
     <div class="container">
       <div class="section-head">
         <div><span class="eyebrow">Преимущества</span><h2>Премиальный подход к промышленной очистке</h2></div>
-        <p>Пескоструйные работы требуют точной настройки оборудования и аккуратной защиты объекта. Мы проектируем процесс до выезда бригады.</p>
+        <p>Пескоструй требует точной настройки оборудования и защиты объекта. Мы заранее подбираем режим работ под материал и задачу.</p>
       </div>
       <div class="grid grid-4">${items.map(([num, title, text]) => `<article class="card icon-card"><span class="icon">${num}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
     </div>
@@ -340,7 +345,7 @@ function servicesSection() {
     <div class="container">
       <div class="section-head">
         <div><span class="eyebrow">Наши услуги</span><h2>Очищаем металл, фасады, кирпич и дерево</h2></div>
-        <p>Берем частные и промышленные объекты: от забора и сруба до ангара, склада или фасада производственного корпуса.</p>
+        <p>Работаем с частными и промышленными объектами: от забора и сруба до ангара, склада или фасада производственного корпуса.</p>
       </div>
       <div class="grid grid-3">${services.map((service) => `<article class="card service-card">
         <img src="${service.image}" alt="${service.title}" loading="lazy">
@@ -358,8 +363,8 @@ function beforeAfterSection() {
         <p>Удаляем ржавчину, старую краску, загрязнения, высолы и следы атмосферного износа. Финальный режим зависит от материала и задачи покрытия.</p>
       </div>
       <div class="card before-after">
-        <figure><img src="${images.before}" alt="Металлическая поверхность до пескоструйной очистки" loading="lazy"><figcaption>До</figcaption></figure>
-        <figure><img src="${images.after}" alt="Металлическая поверхность после пескоструйной очистки" loading="lazy"><figcaption>После</figcaption></figure>
+        <figure><img src="${images.before}" alt="Ржавая металлическая поверхность до пескоструйной очистки" loading="lazy"><figcaption>До очистки</figcaption></figure>
+        <figure><img src="${images.after}" alt="Подготовленная металлическая поверхность после пескоструйной обработки" loading="lazy"><figcaption>После обработки</figcaption></figure>
       </div>
     </div>
   </section>`;
@@ -385,7 +390,7 @@ function equipmentSection() {
         <div class="card card-pad">
           <span class="eyebrow">Оборудование</span>
           <h2>Компрессоры, пескоструйные аппараты и защита зоны работ</h2>
-          <p class="muted">Используем выездные компрессоры, аппараты напорного типа, сопла под разные задачи, рукава, СИЗ и укрывные материалы для защиты окружающих поверхностей.</p>
+          <p class="muted">Используем выездные компрессоры, аппараты напорного типа, сопла под разные задачи, рукава, средства защиты и укрывные материалы.</p>
           <ul class="list">
             <li>Подбор абразива под металл, кирпич, бетон или дерево.</li>
             <li>Контроль пыли и ограничение зоны очистки.</li>
@@ -399,12 +404,12 @@ function equipmentSection() {
 
 function casesSection() {
   const cases = [
-    ["Ангар и фермы", images.hangar, "Очистка металлоконструкций от ржавчины и старого покрытия перед окраской."],
-    ["Кирпичный фасад", images.facade, "Удаление высолов, копоти и следов раствора с сохранением фактуры кирпича."],
-    ["Деревянный дом", images.wood, "Мягкая очистка сруба и подготовка древесины к защитному составу."],
-    ["Забор и ворота", images.fence, "Снятие краски и коррозии перед грунтованием и финишной эмалью."],
-    ["Работа на высоте", images.height, "Очистка промышленных фасадов и элементов с организацией безопасного доступа."],
-    ["Промышленная площадка", images.metal, "Пескоструй металла на действующем объекте с локальным ограждением зоны работ."],
+    ["Металлоконструкции", images.metal, "Реальная пескоструйная обработка в защитной экипировке: снятие коррозии и старого покрытия."],
+    ["Кирпичный фасад", images.facade, "Очистка кирпича и фасадных участков со строительных лесов с защитой соседних поверхностей."],
+    ["Деревянный дом", images.wood, "Мягкая очистка дерева и подготовка поверхности к маслу, антисептику или покраске."],
+    ["Ангар и склад", images.hangar, "Подготовка металлических элементов ангара и промышленного здания перед окраской."],
+    ["Работа на высоте", images.height, "Очистка фасадов и труднодоступных участков с организацией безопасного доступа."],
+    ["Оборудование", images.compressor, "Компрессор, рукава и пескоструйный аппарат подбираются под площадь и материал объекта."],
   ];
   return `<section class="section" id="cases">
     <div class="container">
@@ -412,7 +417,7 @@ function casesSection() {
         <div><span class="eyebrow">Кейсы</span><h2>Объекты разного масштаба</h2></div>
         <p>Показываем типовые задачи, которые чаще всего решают пескоструйные работы в Московской области.</p>
       </div>
-      <div class="grid grid-3">${cases.map(([title, image, text]) => `<article class="card case-card"><img src="${image}" alt="${title}" loading="lazy"><div class="card-pad"><h3>${title}</h3><p>${text}</p></div></article>`).join("")}</div>
+      <div class="grid grid-3">${cases.map(([title, image, text]) => `<article class="card case-card"><img src="${image}" alt="${title}: ${text}" loading="lazy"><div class="card-pad"><h3>${title}</h3><p>${text}</p></div></article>`).join("")}</div>
     </div>
   </section>`;
 }
@@ -436,7 +441,7 @@ function geographySection() {
     <div class="container">
       <div class="section-head">
         <div><span class="eyebrow">География работ</span><h2>Пескоструй по Москве и югу/юго-востоку области</h2></div>
-        <p>Сделали отдельные SEO-страницы под города, где чаще всего нужны выездные пескоструйные работы.</p>
+        <p>Подготовили отдельные страницы под города, где чаще всего заказывают выездные пескоструйные работы.</p>
       </div>
       <div class="city-grid">${cities.map((city) => `<a class="city-pill" href="${sitePath(city.path)}">Пескоструй ${city.name}</a>`).join("")}</div>
     </div>
@@ -471,13 +476,11 @@ function contactCta(context) {
 function homePage() {
   const body = `<section class="hero">
     <div class="hero-media" aria-hidden="true">
-      <video autoplay muted loop playsinline poster="${images.hero}">
-        <source src="${heroVideo}" type="video/webm">
-      </video>
+      <img src="${images.hero}" alt="Рабочий выполняет пескоструйную очистку в защитной экипировке">
     </div>
     <div class="container hero-grid">
       <div>
-        <span class="eyebrow">Пескоструйные работы 2026</span>
+        <span class="eyebrow">Пескоструйные работы</span>
         <h1>Пескоструйная обработка металла, фасадов и дерева в Московской области</h1>
         <p class="lead">Удаляем ржавчину, старую краску и загрязнения. Выезд по Москве и области.</p>
         <div class="hero-actions">
@@ -487,12 +490,12 @@ function homePage() {
         <div class="hero-facts">
           <div class="fact"><strong>3</strong><span>ключевых направления: металл, фасады, дерево</span></div>
           <div class="fact"><strong>15</strong><span>городских SEO-страниц по Московской области</span></div>
-          <div class="fact"><strong>24/7</strong><span>заявки через форму с загрузкой фото</span></div>
+          <div class="fact"><strong>24/7</strong><span>заявки через форму или WhatsApp</span></div>
         </div>
       </div>
       <aside class="request-card">
         <h3>Быстрый расчет по фото</h3>
-        <p>Прикрепите снимки объекта, и мы подготовим предварительную смету на пескоструйную обработку.</p>
+        <p>Прикрепите фото объекта, и мы подготовим предварительный расчет.</p>
         ${leadForm("Главная")}
       </aside>
     </div>
@@ -534,7 +537,7 @@ function servicePage(service) {
       <div>
         <span class="eyebrow">Процесс</span>
         <h2>Настраиваем режим очистки под поверхность</h2>
-        <p class="muted">Пескоструйная обработка начинается с оценки материала, загрязнения и требуемого результата. Для металла важна степень удаления коррозии, для кирпича — сохранение фактуры, для дерева — мягкий режим без глубоких рисок.</p>
+        <p class="muted">Пескоструйная обработка начинается с оценки материала, загрязнения и нужного результата. Для металла важна степень удаления коррозии, для кирпича — сохранение фактуры, для дерева — мягкий режим без глубоких рисок.</p>
       </div>
       <div class="card card-pad">
         <h3>Что входит</h3>
@@ -573,7 +576,7 @@ function portfolioPage() {
       ${breadcrumbs([{ name: "Главная", path: "/" }, { name: "Портфолио и контакты", path: "/portfolio.html" }])}
       <span class="eyebrow">Портфолио и контакты</span>
       <h1>Кейсы пескоструйной очистки и заявка на расчет</h1>
-      <p class="lead">Металлоконструкции, кирпичные фасады, деревянные дома, ангары, заборы и работа на высоте по Москве и Московской области.</p>
+      <p class="lead">Металлоконструкции, кирпичные фасады, деревянные дома, ангары, заборы и высотные работы по Москве и Московской области.</p>
     </div>
   </section>
   ${casesSection()}

@@ -67,4 +67,5 @@ Folder: /docs
 - `phone`, `phoneHref`, `email`, `streetAddress` на актуальные контакты;
 - hero-видео на собственный ролик пескоструйной очистки, если есть фирменная съемка.
 
-Формы подготовлены для Netlify Forms (`data-netlify="true"`) и используют `multipart/form-data` для загрузки фото объекта.
+Формы отправляются через FormSubmit на `tehochistka@mail.ru` и используют `multipart/form-data` для загрузки фото объекта.
+При первой заявке FormSubmit может прислать письмо для подтверждения адреса получателя.

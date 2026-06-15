@@ -23,7 +23,17 @@ document.querySelectorAll('input[type="file"]').forEach((input) => {
 
     const files = Array.from(input.files || []);
     note.textContent = files.length
-      ? `Выбрано файлов: ${files.length}`
-      : "Можно приложить фото металла, фасада, кирпича или дерева.";
+      ? `Выбрано фото: ${files[0].name}`
+      : "Приложите одно фото до 5 МБ. Если файл тяжелый, отправьте его в WhatsApp.";
+  });
+});
+
+document.querySelectorAll("[data-lead-form]").forEach((form) => {
+  form.addEventListener("submit", () => {
+    const button = form.querySelector('button[type="submit"]');
+    if (!button) return;
+
+    button.textContent = "Отправляем...";
+    button.setAttribute("aria-busy", "true");
   });
 });

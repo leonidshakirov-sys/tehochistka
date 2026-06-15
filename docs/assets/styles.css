@@ -513,32 +513,65 @@ h3 {
   font-weight: 900;
 }
 
+.before-after-projects {
+  display: grid;
+  gap: 22px;
+}
+
+.before-after-project {
+  padding: 24px;
+}
+
+.before-after-title {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+.before-after-title p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .before-after {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .before-after figure {
   position: relative;
   margin: 0;
-  min-height: 330px;
+  min-height: 520px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  background: #0a0d12;
 }
 
 .before-after img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .before-after figcaption {
   position: absolute;
   left: 18px;
   top: 18px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 999px;
-  background: rgba(7, 9, 12, 0.76);
+  background: rgba(7, 9, 12, 0.84);
   color: var(--text);
   font-weight: 800;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+}
+
+.before-after figure:last-child figcaption {
+  background: rgba(255, 122, 26, 0.92);
+  color: #140901;
 }
 
 .price-table {
@@ -919,9 +952,18 @@ h3 {
   .grid-2,
   .grid-3,
   .grid-4,
+  .before-after-title,
   .before-after,
   .price-row {
     grid-template-columns: 1fr;
+  }
+
+  .before-after-project {
+    padding: 16px;
+  }
+
+  .before-after figure {
+    min-height: 390px;
   }
 
   .section {

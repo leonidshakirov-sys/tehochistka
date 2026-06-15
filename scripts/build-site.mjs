@@ -35,6 +35,8 @@ const images = {
   compressor: "https://commons.wikimedia.org/wiki/Special:FilePath/Atlas_Copco_XAHS_347-pic1.jpg",
   before: "https://images.unsplash.com/photo-1770208742346-e8bc33802d04?auto=format&fit=crop&w=1000&q=82",
   after: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
+  projectMetalBefore: "https://images.unsplash.com/photo-1712730160061-c64647e6c93c?auto=format&fit=crop&w=1000&q=82",
+  projectMetalAfter: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
 };
 
 const cities = [
@@ -360,15 +362,34 @@ function servicesSection() {
 }
 
 function beforeAfterSection() {
+  const projects = [
+    {
+      title: "Металлоконструкция на открытой площадке",
+      before: images.projectMetalBefore,
+      beforeAlt: "Металлическая конструкция до пескоструйной обработки: темный металл, коррозия и загрязнение",
+      after: images.projectMetalAfter,
+      afterAlt: "Металлическая поверхность после пескоструйной обработки и подготовки под грунт",
+      result: "Фиксируем объект до начала работ и после очистки или грунтования. Такой формат показывает реальный результат по металлу, а не абстрактную текстуру.",
+    },
+  ];
+
   return `<section class="section" id="before-after">
     <div class="container">
       <div class="section-head">
-        <div><span class="eyebrow">До/После</span><h2>Видимый результат за один цикл очистки</h2></div>
-        <p>Показываем реальные типы поверхностей: коррозию до очистки и чистый металл после подготовки. На объекте результат зависит от материала, загрязнения и требуемого покрытия.</p>
+        <div><span class="eyebrow">До/После</span><h2>Реальные пары объектов: до обработки и после</h2></div>
+        <p>Такой формат нужен для портфолио: один и тот же объект снимается до пескоструя и после очистки, грунта или окраски. Это честно показывает результат работ.</p>
       </div>
-      <div class="card before-after">
-        <figure><img src="${images.before}" alt="Крупный план ржавой металлической поверхности до очистки" loading="lazy"><figcaption>Коррозия до очистки</figcaption></figure>
-        <figure><img src="${images.after}" alt="Крупный план чистой металлической поверхности после подготовки" loading="lazy"><figcaption>Чистая поверхность</figcaption></figure>
+      <div class="before-after-projects">
+        ${projects.map((project) => `<article class="card before-after-project">
+          <div class="before-after-title">
+            <h3>${project.title}</h3>
+            <p>${project.result}</p>
+          </div>
+          <div class="before-after">
+            <figure><img src="${project.before}" alt="${project.beforeAlt}" loading="lazy"><figcaption>До пескоструя</figcaption></figure>
+            <figure><img src="${project.after}" alt="${project.afterAlt}" loading="lazy"><figcaption>После обработки</figcaption></figure>
+          </div>
+        </article>`).join("")}
       </div>
     </div>
   </section>`;

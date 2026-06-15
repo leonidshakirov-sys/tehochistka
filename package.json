@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-site.mjs",
+    "build:docs": "node scripts/build-site.mjs --output=docs --path-prefix=/tehochistka --base-url=https://leonidshakirov-sys.github.io/tehochistka",
     "dev": "npm run serve",
     "start": "npm run serve",
-    "serve": "python3 -m http.server 4173 --directory dist"
+    "serve": "python3 -m http.server 4173 --directory dist",
+    "serve:docs": "python3 -m http.server 4174 --directory docs"
   },
   "engines": {
     "node": ">=18"

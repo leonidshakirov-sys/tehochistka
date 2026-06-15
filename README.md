@@ -29,7 +29,35 @@ npm run serve
 - Netlify: конфигурация уже задана в `netlify.toml`, publish directory — `dist`.
 - Vercel: конфигурация уже задана в `vercel.json`, output directory — `dist`.
 - Любой статический хостинг: в качестве корня сайта нужно публиковать папку `dist`, а не корень репозитория.
-- GitHub Pages без отдельного workflow не читает `dist` как корень сайта автоматически; для Pages нужно настроить GitHub Actions или публиковать содержимое `dist`.
+
+## Деплой на GitHub Pages через `docs`
+
+Для GitHub Pages используется отдельная сборка в папку `docs`:
+
+```bash
+npm run build:docs
+```
+
+После пуша изменений в GitHub откройте репозиторий и настройте Pages:
+
+1. `Settings` → `Pages`.
+2. В блоке `Build and deployment` выберите `Deploy from a branch`.
+3. В поле `Branch` выберите `cursor/techochistka-website-0df2`.
+4. В поле папки выберите `/docs`.
+5. Нажмите `Save`.
+
+После публикации сайт будет доступен по адресу:
+
+```text
+https://leonidshakirov-sys.github.io/tehochistka/
+```
+
+Если позже будете публиковать из ветки `main`, сначала смержите PR, затем в настройках Pages выберите:
+
+```text
+Branch: main
+Folder: /docs
+```
 
 ## Перед публикацией
 

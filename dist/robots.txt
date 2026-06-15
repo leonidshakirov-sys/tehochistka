@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://tehochistka.ru/sitemap.xml
-Host: techochistka.ru
+Host: tehochistka.ru

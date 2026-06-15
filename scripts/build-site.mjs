@@ -2,8 +2,19 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = path.resolve(process.cwd());
-const dist = path.join(root, "dist");
-const baseUrl = "https://tehochistka.ru";
+const cliOptions = Object.fromEntries(
+  process.argv
+    .slice(2)
+    .filter((arg) => arg.startsWith("--") && arg.includes("="))
+    .map((arg) => {
+      const [key, ...value] = arg.slice(2).split("=");
+      return [key, value.join("=")];
+    }),
+);
+const outputDir = cliOptions.output || process.env.BUILD_OUTPUT_DIR || "dist";
+const pathPrefix = (cliOptions["path-prefix"] || process.env.SITE_PATH_PREFIX || "").replace(/\/$/, "");
+const baseUrl = (cliOptions["base-url"] || process.env.SITE_BASE_URL || "https://tehochistka.ru").replace(/\/$/, "");
+const dist = path.join(root, outputDir);
 const phone = "+7 (916) 265-92-62";
 const phoneHref = "tel:+79162659262";
 const email = "tehochistka@mail.ru";
@@ -110,6 +121,20 @@ function canonical(pagePath) {
   return `${baseUrl}${pagePath}`;
 }
 
+function sitePath(pagePath) {
+  if (!pathPrefix || !pagePath.startsWith("/")) return pagePath;
+  if (pagePath === "/") return `${pathPrefix}/`;
+  return `${pathPrefix}${pagePath}`;
+}
+
+function siteHost() {
+  try {
+    return new URL(baseUrl).host;
+  } catch {
+    return "tehochistka.ru";
+  }
+}
+
 function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
@@ -196,20 +221,20 @@ function layout({ title, description, keywords, pagePath, body, schemas = [], cu
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://upload.wikimedia.org">
-  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="${sitePath("/assets/styles.css")}">
   ${schemaTags}
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="/" aria-label="Техочистка">
+      <a class="brand" href="${sitePath("/")}" aria-label="Техочистка">
         <span class="brand-mark">Т</span>
         <span>Техочистка</span>
       </a>
       <nav class="menu" data-menu aria-label="Основная навигация">
-        <a href="/" ${current === "home" ? 'aria-current="page"' : ""}>Главная</a>
-        ${services.map((service) => `<a href="${service.path}" ${current === service.slug ? 'aria-current="page"' : ""}>${service.nav}</a>`).join("")}
-        <a href="/portfolio.html" ${current === "portfolio" ? 'aria-current="page"' : ""}>Портфолио и контакты</a>
+        <a href="${sitePath("/")}" ${current === "home" ? 'aria-current="page"' : ""}>Главная</a>
+        ${services.map((service) => `<a href="${sitePath(service.path)}" ${current === service.slug ? 'aria-current="page"' : ""}>${service.nav}</a>`).join("")}
+        <a href="${sitePath("/portfolio.html")}" ${current === "portfolio" ? 'aria-current="page"' : ""}>Портфолио и контакты</a>
       </nav>
       <div class="header-actions">
         <a class="phone-link" href="${phoneHref}">${phone}</a>
@@ -224,7 +249,7 @@ function layout({ title, description, keywords, pagePath, body, schemas = [], cu
     ${body}
   </main>
   ${footer()}
-  <script src="/assets/app.js" defer></script>
+  <script src="${sitePath("/assets/app.js")}" defer></script>
 </body>
 </html>`;
 }
@@ -234,19 +259,19 @@ function footer() {
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="/"><span class="brand-mark">Т</span><span>Техочистка</span></a>
+          <a class="brand" href="${sitePath("/")}"><span class="brand-mark">Т</span><span>Техочистка</span></a>
           <p class="muted" style="margin-top:18px;max-width:520px">Пескоструйная обработка металла, очистка фасадов, кирпича и дерева с выездом по Москве и Московской области.</p>
         </div>
         <div class="footer-links">
           <strong>Услуги</strong>
-          ${services.map((service) => `<a href="${service.path}">${service.title}</a>`).join("")}
+          ${services.map((service) => `<a href="${sitePath(service.path)}">${service.title}</a>`).join("")}
         </div>
         <div class="footer-links">
           <strong>Контакты</strong>
           <a href="${phoneHref}">${phone}</a>
           <a href="mailto:${email}">${email}</a>
           <span>${fullAddress}</span>
-          <a href="/sitemap.xml">Sitemap</a>
+          <a href="${sitePath("/sitemap.xml")}">Sitemap</a>
         </div>
       </div>
       <div class="copyright">© ${new Date().getFullYear()} Техочистка. Индустриальная очистка поверхностей.</div>
@@ -260,7 +285,7 @@ function leadForm(context = "Общая заявка") {
     .replaceAll(/[^a-zа-яё0-9]+/giu, "-")
     .replaceAll(/^-|-$/g, "");
 
-  return `<form class="form-grid" name="lead" method="POST" action="/thanks.html" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+  return `<form class="form-grid" name="lead" method="POST" action="${sitePath("/thanks.html")}" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
     <input type="hidden" name="form-name" value="lead">
     <input type="hidden" name="page" value="${esc(context)}">
     <p style="display:none"><label>Не заполняйте это поле <input name="bot-field"></label></p>
@@ -288,7 +313,7 @@ function leadForm(context = "Общая заявка") {
 
 function breadcrumbs(items) {
   return `<div class="breadcrumbs">${items.map((item, index) => (
-    index === items.length - 1 ? `<span>${item.name}</span>` : `<a href="${item.path}">${item.name}</a><span>/</span>`
+    index === items.length - 1 ? `<span>${item.name}</span>` : `<a href="${sitePath(item.path)}">${item.name}</a><span>/</span>`
   )).join("")}</div>`;
 }
 
@@ -319,7 +344,7 @@ function servicesSection() {
       </div>
       <div class="grid grid-3">${services.map((service) => `<article class="card service-card">
         <img src="${service.image}" alt="${service.title}" loading="lazy">
-        <div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${service.path}">Подробнее</a></div>
+        <div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div>
       </article>`).join("")}</div>
     </div>
   </section>`;
@@ -413,7 +438,7 @@ function geographySection() {
         <div><span class="eyebrow">География работ</span><h2>Пескоструй по Москве и югу/юго-востоку области</h2></div>
         <p>Сделали отдельные SEO-страницы под города, где чаще всего нужны выездные пескоструйные работы.</p>
       </div>
-      <div class="city-grid">${cities.map((city) => `<a class="city-pill" href="${city.path}">Пескоструй ${city.name}</a>`).join("")}</div>
+      <div class="city-grid">${cities.map((city) => `<a class="city-pill" href="${sitePath(city.path)}">Пескоструй ${city.name}</a>`).join("")}</div>
     </div>
   </section>`;
 }
@@ -584,7 +609,7 @@ function cityPage(city) {
         <div><span class="eyebrow">Пескоструй ${city.name}</span><h2>Выездная очистка поверхностей под ремонт и покраску</h2></div>
         <p>Работаем на частных участках, производственных площадках, складах, фасадах и строительных объектах. Предварительный расчет можно получить по фото.</p>
       </div>
-      <div class="grid grid-3">${services.map((service) => `<article class="card service-card"><img src="${service.image}" alt="${service.title} в городе ${city.name}" loading="lazy"><div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${service.path}">Подробнее</a></div></article>`).join("")}</div>
+      <div class="grid grid-3">${services.map((service) => `<article class="card service-card"><img src="${service.image}" alt="${service.title} в городе ${city.name}" loading="lazy"><div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div></article>`).join("")}</div>
     </div>
   </section>
   <section class="section-tight">
@@ -636,7 +661,7 @@ function thanksPage() {
       <span class="eyebrow">Спасибо</span>
       <h1>Заявка отправлена</h1>
       <p class="lead">Мы свяжемся с вами для уточнения объекта, площади и технологии пескоструйной обработки.</p>
-      <div class="hero-actions"><a class="button button-primary" href="/">Вернуться на главную</a><a class="button button-secondary" href="/portfolio.html">Посмотреть кейсы</a></div>
+      <div class="hero-actions"><a class="button button-primary" href="${sitePath("/")}">Вернуться на главную</a><a class="button button-secondary" href="${sitePath("/portfolio.html")}">Посмотреть кейсы</a></div>
     </div>
   </section>`;
 
@@ -662,7 +687,7 @@ function robots() {
 Allow: /
 
 Sitemap: ${baseUrl}/sitemap.xml
-Host: techochistka.ru
+Host: ${siteHost()}
 `;
 }
 
@@ -682,4 +707,6 @@ write("thanks.html", thanksPage());
 write("sitemap.xml", sitemap(indexedPaths));
 write("robots.txt", robots());
 
-console.log(`Built ${htmlPaths.length} HTML pages plus assets in dist/`);
+fs.writeFileSync(path.join(dist, ".nojekyll"), "");
+
+console.log(`Built ${htmlPaths.length} HTML pages plus assets in ${outputDir}/`);

@@ -25,7 +25,7 @@ const addressLocality = "Москва";
 const fullAddress = `${addressLocality}, ${streetAddress}`;
 
 const images = {
-  hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sandblasting_with_protective_gear_(9245784107).jpg",
+  hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
   metal: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
   facade: "https://images.unsplash.com/photo-1780849328094-228dc15a6e10?auto=format&fit=crop&w=1200&q=82",
   wood: "https://images.unsplash.com/photo-1777728868180-dbfc61eef59f?auto=format&fit=crop&w=1200&q=82",
@@ -485,13 +485,18 @@ function homePage() {
     <div class="container hero-grid">
       <div>
         <span class="eyebrow">Пескоструйные работы</span>
-        <h1>Пескоструйная обработка металла, фасадов и дерева в Московской области</h1>
+        <h1 class="hero-heading">
+          <span class="hero-heading-accent">Пескоструйная</span>
+          <span class="hero-heading-main">обработка</span>
+          <span class="hero-heading-sub">металла, фасадов и дерева</span>
+        </h1>
         <p class="lead">Удаляем ржавчину, старую краску и загрязнения. Выезд по Москве и области.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#request">Рассчитать стоимость</a>
           <a class="button button-secondary" href="#request">Отправить фото объекта</a>
           <a class="button button-max" href="${maxHref}" target="_blank" rel="noopener">MAX</a>
         </div>
+        <div class="hero-location-badge">Серпухов, Москва и Московская область</div>
         <div class="hero-facts">
           <div class="fact"><strong>3</strong><span>ключевых направления: металл, фасады, дерево</span></div>
           <div class="fact"><strong>15</strong><span>городских SEO-страниц по Московской области</span></div>

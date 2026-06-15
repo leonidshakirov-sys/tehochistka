@@ -26,15 +26,15 @@ const fullAddress = `${addressLocality}, ${streetAddress}`;
 
 const images = {
   hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sandblasting_with_protective_gear_(9245784107).jpg",
-  metal: "https://commons.wikimedia.org/wiki/Special:FilePath/Sandblasting_with_protective_gear_(9245784107).jpg",
-  facade: "https://images.unsplash.com/photo-1777984947115-05de206fd91d?auto=format&fit=crop&w=1200&q=82",
-  wood: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=82",
-  hangar: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=82",
-  fence: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=82",
+  metal: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
+  facade: "https://images.unsplash.com/photo-1780849328094-228dc15a6e10?auto=format&fit=crop&w=1200&q=82",
+  wood: "https://images.unsplash.com/photo-1777728868180-dbfc61eef59f?auto=format&fit=crop&w=1200&q=82",
+  hangar: "https://images.unsplash.com/photo-1759310347407-b0dbfeb8745d?auto=format&fit=crop&w=1200&q=82",
+  fence: "https://images.unsplash.com/photo-1712730160061-c64647e6c93c?auto=format&fit=crop&w=1200&q=82",
   height: "https://images.unsplash.com/photo-1777984947115-05de206fd91d?auto=format&fit=crop&w=1200&q=82",
-  compressor: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=82",
-  before: "https://images.unsplash.com/photo-1516216628859-9bccecab13ca?auto=format&fit=crop&w=1000&q=80",
-  after: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=82",
+  compressor: "https://commons.wikimedia.org/wiki/Special:FilePath/Atlas_Copco_XAHS_347-pic1.jpg",
+  before: "https://images.unsplash.com/photo-1770208742346-e8bc33802d04?auto=format&fit=crop&w=1000&q=82",
+  after: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
 };
 
 const cities = [
@@ -62,6 +62,7 @@ const services = [
     nav: "Металл",
     path: "/services/metal.html",
     image: images.metal,
+    imageAlt: "Оператор выполняет пескоструйную обработку металлической рамы",
     description: "Удаление ржавчины, окалины, старой краски и подготовка металлоконструкций к грунту и окраске.",
     keywords: "пескоструйная обработка металла, удаление ржавчины, пескоструй Московская область",
     bullets: ["фермы, балки, швеллер, трубы и закладные", "ангары, ворота, заборы и емкости", "подготовка поверхности под грунт, эмаль или огнезащиту"],
@@ -72,6 +73,7 @@ const services = [
     nav: "Фасады",
     path: "/services/facades.html",
     image: images.facade,
+    imageAlt: "Рабочий в защитной экипировке у кирпичного фасада и строительных лесов",
     description: "Аккуратная абразивная очистка кирпича, бетона, натурального камня и промышленных фасадов.",
     keywords: "очистка фасада, очистка кирпича, пескоструй Чехов, пескоструй Домодедово",
     bullets: ["снятие высолов, сажи, краски и цементного налета", "работа на высоте и локальная защита окон", "подбор фракции под состояние кладки"],
@@ -82,6 +84,7 @@ const services = [
     nav: "Дерево",
     path: "/services/wood.html",
     image: images.wood,
+    imageAlt: "Старый деревянный дом перед обновлением фасада",
     description: "Мягкая очистка и браширование деревянных домов, срубов, террас, балок и фасадной доски.",
     keywords: "пескоструй дерева, пескоструйная обработка дерева, пескоструй Подольск",
     bullets: ["снятие старой краски без грубой шлифовки", "подготовка к маслу, антисептику и покраске", "аккуратная работа с углами, венцами и наличниками"],
@@ -349,7 +352,7 @@ function servicesSection() {
         <p>Работаем с частными и промышленными объектами: от забора и сруба до ангара, склада или фасада производственного корпуса.</p>
       </div>
       <div class="grid grid-3">${services.map((service) => `<article class="card service-card">
-        <img src="${service.image}" alt="${service.title}" loading="lazy">
+        <img src="${service.image}" alt="${service.imageAlt}" loading="lazy">
         <div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div>
       </article>`).join("")}</div>
     </div>
@@ -361,11 +364,11 @@ function beforeAfterSection() {
     <div class="container">
       <div class="section-head">
         <div><span class="eyebrow">До/После</span><h2>Видимый результат за один цикл очистки</h2></div>
-        <p>Удаляем ржавчину, старую краску, загрязнения, высолы и следы атмосферного износа. Финальный режим зависит от материала и задачи покрытия.</p>
+        <p>Показываем реальные типы поверхностей: коррозию до очистки и чистый металл после подготовки. На объекте результат зависит от материала, загрязнения и требуемого покрытия.</p>
       </div>
       <div class="card before-after">
-        <figure><img src="${images.before}" alt="Ржавая металлическая поверхность до пескоструйной очистки" loading="lazy"><figcaption>До очистки</figcaption></figure>
-        <figure><img src="${images.after}" alt="Подготовленная металлическая поверхность после пескоструйной обработки" loading="lazy"><figcaption>После обработки</figcaption></figure>
+        <figure><img src="${images.before}" alt="Крупный план ржавой металлической поверхности до очистки" loading="lazy"><figcaption>Коррозия до очистки</figcaption></figure>
+        <figure><img src="${images.after}" alt="Крупный план чистой металлической поверхности после подготовки" loading="lazy"><figcaption>Чистая поверхность</figcaption></figure>
       </div>
     </div>
   </section>`;
@@ -387,7 +390,7 @@ function equipmentSection() {
   return `<section class="section" id="equipment">
     <div class="container">
       <div class="equipment-strip">
-        <div class="card media-card"><img src="${images.compressor}" alt="Компрессор и пескоструйное оборудование на объекте" loading="lazy"></div>
+        <div class="card media-card"><img src="${images.compressor}" alt="Передвижной строительный компрессор Atlas Copco для пескоструйных работ" loading="lazy"></div>
         <div class="card card-pad">
           <span class="eyebrow">Оборудование</span>
           <h2>Компрессоры, пескоструйные аппараты и защита зоны работ</h2>
@@ -405,12 +408,12 @@ function equipmentSection() {
 
 function casesSection() {
   const cases = [
-    ["Металлоконструкции", images.metal, "Реальная пескоструйная обработка в защитной экипировке: снятие коррозии и старого покрытия."],
-    ["Кирпичный фасад", images.facade, "Очистка кирпича и фасадных участков со строительных лесов с защитой соседних поверхностей."],
-    ["Деревянный дом", images.wood, "Мягкая очистка дерева и подготовка поверхности к маслу, антисептику или покраске."],
-    ["Ангар и склад", images.hangar, "Подготовка металлических элементов ангара и промышленного здания перед окраской."],
-    ["Работа на высоте", images.height, "Очистка фасадов и труднодоступных участков с организацией безопасного доступа."],
-    ["Оборудование", images.compressor, "Компрессор, рукава и пескоструйный аппарат подбираются под площадь и материал объекта."],
+    ["Металлоконструкции", images.metal, "Пескоструй металлической рамы", "На фото реальная операция пескоструйной обработки металлической рамы перед дальнейшей покраской."],
+    ["Кирпичный фасад", images.facade, "Рабочий у кирпичного фасада со строительными лесами", "Так выглядит объект, где требуется очистка кирпича, защита окон и аккуратная работа рядом с лесами."],
+    ["Деревянный дом", images.wood, "Старый деревянный дом перед обновлением фасада", "Фото соответствует задаче по мягкой очистке старого дерева перед антисептиком, маслом или покраской."],
+    ["Ангар и склад", images.hangar, "Промышленное здание с металлическим сайдингом", "Пример промышленного здания, где очищают металлические элементы, ворота, фермы и фасадные участки."],
+    ["Работа на высоте", images.height, "Рабочий на строительных лесах у фасада", "Фото показывает высотный доступ у фасада: такие работы требуют лесов, страховки и защиты зоны вокруг."],
+    ["Оборудование", images.compressor, "Передвижной строительный компрессор Atlas Copco", "Для пескоструя на объекте нужен производительный компрессор, рукава и аппарат напорного типа."],
   ];
   return `<section class="section" id="cases">
     <div class="container">
@@ -418,7 +421,7 @@ function casesSection() {
         <div><span class="eyebrow">Кейсы</span><h2>Объекты разного масштаба</h2></div>
         <p>Показываем типовые задачи, которые чаще всего решают пескоструйные работы в Московской области.</p>
       </div>
-      <div class="grid grid-3">${cases.map(([title, image, text]) => `<article class="card case-card"><img src="${image}" alt="${title}: ${text}" loading="lazy"><div class="card-pad"><h3>${title}</h3><p>${text}</p></div></article>`).join("")}</div>
+      <div class="grid grid-3">${cases.map(([title, image, imageAlt, text]) => `<article class="card case-card"><img src="${image}" alt="${imageAlt}" loading="lazy"><div class="card-pad"><h3>${title}</h3><p>${text}</p></div></article>`).join("")}</div>
     </div>
   </section>`;
 }
@@ -614,7 +617,7 @@ function cityPage(city) {
         <div><span class="eyebrow">Пескоструй ${city.name}</span><h2>Выездная очистка поверхностей под ремонт и покраску</h2></div>
         <p>Работаем на частных участках, производственных площадках, складах, фасадах и строительных объектах. Предварительный расчет можно получить по фото.</p>
       </div>
-      <div class="grid grid-3">${services.map((service) => `<article class="card service-card"><img src="${service.image}" alt="${service.title} в городе ${city.name}" loading="lazy"><div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div></article>`).join("")}</div>
+      <div class="grid grid-3">${services.map((service) => `<article class="card service-card"><img src="${service.image}" alt="${service.imageAlt} в городе ${city.name}" loading="lazy"><div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div></article>`).join("")}</div>
     </div>
   </section>
   <section class="section-tight">

@@ -64,7 +64,7 @@ Folder: /docs
 В `scripts/build-site.mjs` при необходимости замените:
 
 - `baseUrl` на рабочий домен;
-- `phone`, `phoneHref`, `email`, `streetAddress` на актуальные контакты;
+- `phone`, `phoneHref`, `whatsappHref`, `maxHref`, `email`, `streetAddress` на актуальные контакты;
 - hero-видео на собственный ролик пескоструйной очистки, если есть фирменная съемка.
 
 Формы отправляются через FormSubmit на `tehochistka@mail.ru` и используют `multipart/form-data` для загрузки фото объекта.

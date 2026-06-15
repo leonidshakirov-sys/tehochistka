@@ -18,6 +18,7 @@ const dist = path.join(root, outputDir);
 const phone = "+7 (916) 265-92-62";
 const phoneHref = "tel:+79162659262";
 const whatsappHref = "https://wa.me/79162659262";
+const maxHref = "https://max.ru/";
 const email = "tehochistka@mail.ru";
 const streetAddress = "32-й км МКАД, владение 15";
 const addressLocality = "Москва";
@@ -486,6 +487,7 @@ function homePage() {
         <div class="hero-actions">
           <a class="button button-primary" href="#request">Рассчитать стоимость</a>
           <a class="button button-secondary" href="#request">Отправить фото объекта</a>
+          <a class="button button-max" href="${maxHref}" target="_blank" rel="noopener">MAX</a>
         </div>
         <div class="hero-facts">
           <div class="fact"><strong>3</strong><span>ключевых направления: металл, фасады, дерево</span></div>

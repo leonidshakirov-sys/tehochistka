@@ -36,7 +36,7 @@ const images = {
   after: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
   projectMetalBefore: "/assets/metal-before-sandblasting-structure.png",
   projectMetalAfter: "/assets/metal-after-sandblasting-structure.png",
-  projectMetalComparison: "/assets/metal-before-after-same-angle.png",
+  projectMetalComparison: "/assets/i-beam-before-after-sandblasting.png",
 };
 
 const cities = [
@@ -370,7 +370,7 @@ function beforeAfterSection() {
     {
       title: "Металлоконструкция на открытой площадке",
       comparison: images.projectMetalComparison,
-      comparisonAlt: "Сравнение до и после пескоструйной очистки одной металлоконструкции в одном ракурсе",
+      comparisonAlt: "Сравнение до и после пескоструйной очистки стальной двутавровой балки в одном ракурсе",
       result: "Фиксируем объект до начала работ и после очистки. Такой формат показывает реальный результат по металлу, а не абстрактную текстуру.",
     },
   ];

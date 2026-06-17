@@ -18,7 +18,6 @@ const dist = path.join(root, outputDir);
 const phone = "+7 (916) 265-92-62";
 const phoneHref = "tel:+79162659262";
 const whatsappHref = "https://wa.me/79162659262";
-const maxHref = "https://max.ru/";
 const email = "tehochistka@mail.ru";
 const streetAddress = "32-й км МКАД, владение 15";
 const addressLocality = "Москва";
@@ -26,7 +25,7 @@ const fullAddress = `${addressLocality}, ${streetAddress}`;
 
 const images = {
   hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
-  metal: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
+  metal: "/assets/metal-sandblasting-industrial.png",
   facade: "https://images.unsplash.com/photo-1780849328094-228dc15a6e10?auto=format&fit=crop&w=1200&q=82",
   wood: "https://images.unsplash.com/photo-1777728868180-dbfc61eef59f?auto=format&fit=crop&w=1200&q=82",
   hangar: "https://images.unsplash.com/photo-1759310347407-b0dbfeb8745d?auto=format&fit=crop&w=1200&q=82",
@@ -64,8 +63,8 @@ const services = [
     nav: "Металл",
     path: "/services/metal.html",
     image: images.metal,
-    imageAlt: "Оператор выполняет пескоструйную обработку металлической рамы",
-    description: "Удаление ржавчины, окалины, старой краски и подготовка металлоконструкций к грунту и окраске.",
+    imageAlt: "Профессиональная пескоструйная очистка крупной металлической балки на промышленном объекте",
+    description: "Профессиональная пескоструйная очистка металлоконструкций: удаляем ржавчину, старую краску и готовим балки, фермы, колонны к грунту и окраске.",
     keywords: "пескоструйная обработка металла, удаление ржавчины, пескоструй Московская область",
     bullets: ["фермы, балки, швеллер, трубы и закладные", "ангары, ворота, заборы и емкости", "подготовка поверхности под грунт, эмаль или огнезащиту"],
   },
@@ -138,6 +137,10 @@ function siteHost() {
   } catch {
     return "tehochistka.ru";
   }
+}
+
+function mediaSrc(src) {
+  return src.startsWith("/") ? sitePath(src) : src;
 }
 
 function localBusinessSchema() {
@@ -354,7 +357,7 @@ function servicesSection() {
         <p>Работаем с частными и промышленными объектами: от забора и сруба до ангара, склада или фасада производственного корпуса.</p>
       </div>
       <div class="grid grid-3">${services.map((service) => `<article class="card service-card">
-        <img src="${service.image}" alt="${service.imageAlt}" loading="lazy">
+        <img src="${mediaSrc(service.image)}" alt="${service.imageAlt}" loading="lazy">
         <div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div>
       </article>`).join("")}</div>
     </div>
@@ -386,8 +389,8 @@ function beforeAfterSection() {
             <p>${project.result}</p>
           </div>
           <div class="before-after">
-            <figure><img src="${project.before}" alt="${project.beforeAlt}" loading="lazy"><figcaption>До пескоструя</figcaption></figure>
-            <figure><img src="${project.after}" alt="${project.afterAlt}" loading="lazy"><figcaption>После обработки</figcaption></figure>
+            <figure><img src="${mediaSrc(project.before)}" alt="${project.beforeAlt}" loading="lazy"><figcaption>До пескоструя</figcaption></figure>
+            <figure><img src="${mediaSrc(project.after)}" alt="${project.afterAlt}" loading="lazy"><figcaption>После обработки</figcaption></figure>
           </div>
         </article>`).join("")}
       </div>
@@ -411,7 +414,7 @@ function equipmentSection() {
   return `<section class="section" id="equipment">
     <div class="container">
       <div class="equipment-strip">
-        <div class="card media-card"><img src="${images.compressor}" alt="Передвижной строительный компрессор Atlas Copco для пескоструйных работ" loading="lazy"></div>
+        <div class="card media-card"><img src="${mediaSrc(images.compressor)}" alt="Передвижной строительный компрессор Atlas Copco для пескоструйных работ" loading="lazy"></div>
         <div class="card card-pad">
           <span class="eyebrow">Оборудование</span>
           <h2>Компрессоры, пескоструйные аппараты и защита зоны работ</h2>
@@ -442,7 +445,7 @@ function casesSection() {
         <div><span class="eyebrow">Кейсы</span><h2>Объекты разного масштаба</h2></div>
         <p>Показываем типовые задачи, которые чаще всего решают пескоструйные работы в Московской области.</p>
       </div>
-      <div class="grid grid-3">${cases.map(([title, image, imageAlt, text]) => `<article class="card case-card"><img src="${image}" alt="${imageAlt}" loading="lazy"><div class="card-pad"><h3>${title}</h3><p>${text}</p></div></article>`).join("")}</div>
+      <div class="grid grid-3">${cases.map(([title, image, imageAlt, text]) => `<article class="card case-card"><img src="${mediaSrc(image)}" alt="${imageAlt}" loading="lazy"><div class="card-pad"><h3>${title}</h3><p>${text}</p></div></article>`).join("")}</div>
     </div>
   </section>`;
 }
@@ -501,7 +504,7 @@ function contactCta(context) {
 function homePage() {
   const body = `<section class="hero">
     <div class="hero-media" aria-hidden="true">
-      <img src="${images.hero}" alt="Рабочий выполняет пескоструйную очистку в защитной экипировке">
+      <img src="${mediaSrc(images.hero)}" alt="Рабочий выполняет пескоструйную очистку в защитной экипировке">
     </div>
     <div class="container hero-grid">
       <div>
@@ -515,12 +518,11 @@ function homePage() {
         <div class="hero-actions">
           <a class="button button-primary" href="#request">Рассчитать стоимость</a>
           <a class="button button-secondary" href="#request">Отправить фото объекта</a>
-          <a class="button button-max" href="${maxHref}" target="_blank" rel="noopener">MAX</a>
         </div>
         <div class="hero-location-badge">Серпухов, Москва и Московская область</div>
         <div class="hero-facts">
           <div class="fact"><strong>3</strong><span>ключевых направления: металл, фасады, дерево</span></div>
-          <div class="fact"><strong>15</strong><span>городских SEO-страниц по Московской области</span></div>
+          <div class="fact"><strong>МО</strong><span>выезд по Москве и Московской области</span></div>
           <div class="fact"><strong>24/7</strong><span>заявки через форму или WhatsApp</span></div>
         </div>
       </div>
@@ -554,7 +556,7 @@ function homePage() {
 }
 
 function servicePage(service) {
-  const body = `<section class="page-hero" style="--hero-image:url('${service.image}')">
+  const body = `<section class="page-hero" style="--hero-image:url('${mediaSrc(service.image)}')">
     <div class="container">
       ${breadcrumbs([{ name: "Главная", path: "/" }, { name: service.title, path: service.path }])}
       <span class="eyebrow">Услуга</span>
@@ -602,7 +604,7 @@ function servicePage(service) {
 }
 
 function portfolioPage() {
-  const body = `<section class="page-hero" style="--hero-image:url('${images.hangar}')">
+  const body = `<section class="page-hero" style="--hero-image:url('${mediaSrc(images.hangar)}')">
     <div class="container">
       ${breadcrumbs([{ name: "Главная", path: "/" }, { name: "Портфолио и контакты", path: "/portfolio.html" }])}
       <span class="eyebrow">Портфолио и контакты</span>
@@ -628,7 +630,7 @@ function portfolioPage() {
 
 function cityPage(city) {
   const title = `Пескоструй ${city.name}`;
-  const body = `<section class="page-hero" style="--hero-image:url('${images.metal}')">
+  const body = `<section class="page-hero" style="--hero-image:url('${mediaSrc(images.metal)}')">
     <div class="container">
       ${breadcrumbs([{ name: "Главная", path: "/" }, { name: title, path: city.path }])}
       <span class="eyebrow">Городская SEO-страница</span>
@@ -643,7 +645,7 @@ function cityPage(city) {
         <div><span class="eyebrow">Пескоструй ${city.name}</span><h2>Выездная очистка поверхностей под ремонт и покраску</h2></div>
         <p>Работаем на частных участках, производственных площадках, складах, фасадах и строительных объектах. Предварительный расчет можно получить по фото.</p>
       </div>
-      <div class="grid grid-3">${services.map((service) => `<article class="card service-card"><img src="${service.image}" alt="${service.imageAlt} в городе ${city.name}" loading="lazy"><div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div></article>`).join("")}</div>
+      <div class="grid grid-3">${services.map((service) => `<article class="card service-card"><img src="${mediaSrc(service.image)}" alt="${service.imageAlt} в городе ${city.name}" loading="lazy"><div class="card-pad"><h3>${service.title}</h3><p>${service.description}</p><a class="button button-dark" href="${sitePath(service.path)}">Подробнее</a></div></article>`).join("")}</div>
     </div>
   </section>
   <section class="section-tight">
@@ -690,7 +692,7 @@ function cityPage(city) {
 }
 
 function thanksPage() {
-  const body = `<section class="page-hero" style="--hero-image:url('${images.metal}')">
+  const body = `<section class="page-hero" style="--hero-image:url('${mediaSrc(images.metal)}')">
     <div class="container">
       <span class="eyebrow">Спасибо</span>
       <h1>Заявка отправлена</h1>
@@ -729,6 +731,10 @@ fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(path.join(dist, "assets"), { recursive: true });
 fs.copyFileSync(path.join(root, "src", "styles.css"), path.join(dist, "assets", "styles.css"));
 fs.copyFileSync(path.join(root, "src", "app.js"), path.join(dist, "assets", "app.js"));
+const sourceAssets = path.join(root, "src", "assets");
+if (fs.existsSync(sourceAssets)) {
+  fs.cpSync(sourceAssets, path.join(dist, "assets"), { recursive: true });
+}
 
 const htmlPaths = ["/", ...services.map((service) => service.path), "/portfolio.html", ...cities.map((city) => city.path), "/thanks.html"];
 const indexedPaths = htmlPaths.filter((pagePath) => pagePath !== "/thanks.html");

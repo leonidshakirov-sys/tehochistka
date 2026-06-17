@@ -511,8 +511,7 @@ function geographySection() {
   return `<section class="section" id="geography">
     <div class="container">
       <div class="section-head">
-        <div><span class="eyebrow">География работ</span><h2>Пескоструй по Москве и югу/юго-востоку области</h2></div>
-        <p>Подготовили отдельные страницы под города, где чаще всего заказывают выездные пескоструйные работы.</p>
+        <div><span class="eyebrow">География работ</span><h2>Пескоструй по Москве и Московской области.</h2></div>
       </div>
       <div class="city-grid">${cities.map((city) => `<a class="city-pill" href="${sitePath(city.path)}">Пескоструй ${city.name}</a>`).join("")}</div>
     </div>

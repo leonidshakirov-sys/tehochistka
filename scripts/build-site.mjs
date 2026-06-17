@@ -682,6 +682,7 @@ function contactsPage() {
             <a href="mailto:${email}"><strong>Email</strong><span>${email}</span></a>
             <div><strong>Адрес</strong><span>${fullAddress}</span></div>
             <div><strong>Выезд</strong><span>Москва и Московская область</span></div>
+            <div><strong>Реквизиты</strong><span>ИП Шакиров Леонид Альбертович<br>ИНН 772607203680<br>ОГРНИП 317774600508842</span></div>
           </div>
           <div class="hero-actions">
             <a class="button button-primary" href="${phoneHref}">Позвонить</a>

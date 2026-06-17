@@ -206,7 +206,7 @@ video {
   position: relative;
   overflow: hidden;
   min-height: 690px;
-  padding: 102px 0 62px;
+  padding: 56px 0 62px;
 }
 
 .hero-media {
@@ -395,7 +395,7 @@ h3 {
 
 .request-card {
   padding: 26px;
-  margin-top: -34px;
+  margin-top: -58px;
 }
 
 .request-card p,
@@ -842,7 +842,7 @@ h3 {
 
   .hero {
     min-height: auto;
-    padding-top: 84px;
+    padding-top: 58px;
   }
 
   h1 {

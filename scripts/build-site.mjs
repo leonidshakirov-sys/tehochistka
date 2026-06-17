@@ -519,7 +519,7 @@ function homePage() {
           <a class="button button-primary" href="#request">Рассчитать стоимость</a>
           <a class="button button-secondary" href="#request">Отправить фото объекта</a>
         </div>
-        <div class="hero-location-badge">Серпухов, Москва и Московская область</div>
+        <div class="hero-location-badge">Москва и Московская область</div>
         <div class="hero-facts">
           <div class="fact"><strong>3</strong><span>ключевых направления: металл, фасады, дерево</span></div>
           <div class="fact"><strong>МО</strong><span>выезд по Москве и Московской области</span></div>

@@ -326,7 +326,7 @@ function leadForm(context = "Общая заявка") {
       <button class="button button-primary" type="submit">Отправить заявку</button>
       <a class="button button-secondary" href="${whatsappHref}" target="_blank" rel="noopener">Фото в WhatsApp</a>
     </div>
-    <p class="form-note">Заявка отправляется на ${email}. При первой отправке FormSubmit может попросить подтвердить адрес получателя.</p>
+    <p class="form-note">* Нажимая кнопку Отправить, Вы даёте согласие на использование конфиденциальной информации.</p>
   </form>`;
 }
 

@@ -34,8 +34,8 @@ const images = {
   compressor: "https://commons.wikimedia.org/wiki/Special:FilePath/Atlas_Copco_XAHS_347-pic1.jpg",
   before: "https://images.unsplash.com/photo-1770208742346-e8bc33802d04?auto=format&fit=crop&w=1000&q=82",
   after: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
-  projectMetalBefore: "https://images.unsplash.com/photo-1712730160061-c64647e6c93c?auto=format&fit=crop&w=1000&q=82",
-  projectMetalAfter: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
+  projectMetalBefore: "/assets/metal-before-sandblasting-structure.png",
+  projectMetalAfter: "/assets/metal-after-sandblasting-structure.png",
 };
 
 const cities = [

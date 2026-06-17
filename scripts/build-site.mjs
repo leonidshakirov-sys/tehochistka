@@ -522,7 +522,7 @@ function homePage() {
         <div class="hero-location-badge">Москва и Московская область</div>
         <div class="hero-facts">
           <div class="fact"><strong>3</strong><span>ключевых направления: металл, фасады, дерево</span></div>
-          <div class="fact"><strong>МО</strong><span>выезд по Москве и Московской области</span></div>
+          <div class="fact fact-text-only"><span>Выезд по Москве и Московской области</span></div>
           <div class="fact"><strong>24/7</strong><span>заявки через форму или WhatsApp</span></div>
         </div>
       </div>

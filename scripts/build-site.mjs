@@ -22,6 +22,10 @@ const email = "tehochistka@mail.ru";
 const streetAddress = "32-й км МКАД, владение 15";
 const addressLocality = "Москва";
 const fullAddress = `${addressLocality}, ${streetAddress}`;
+const mapLat = "55.57495";
+const mapLng = "37.59822";
+const yandexRouteUrl = `https://yandex.ru/maps/?rtext=~${mapLat},${mapLng}&rtt=auto`;
+const googleRouteUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapLat},${mapLng}`;
 
 const images = {
   hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
@@ -243,7 +247,7 @@ function layout({ title, description, keywords, pagePath, body, schemas = [], cu
       <nav class="menu" data-menu aria-label="Основная навигация">
         <a href="${sitePath("/")}" ${current === "home" ? 'aria-current="page"' : ""}>Главная</a>
         ${services.map((service) => `<a href="${sitePath(service.path)}" ${current === service.slug ? 'aria-current="page"' : ""}>${service.nav}</a>`).join("")}
-        <a href="${sitePath("/portfolio.html")}" ${current === "portfolio" ? 'aria-current="page"' : ""}>Портфолио и контакты</a>
+        <a href="${sitePath("/contacts.html")}" ${current === "contacts" ? 'aria-current="page"' : ""}>Контакты</a>
       </nav>
       <div class="header-actions">
         <a class="phone-link" href="${phoneHref}">${phone}</a>
@@ -658,29 +662,85 @@ function servicePage(service) {
   });
 }
 
-function portfolioPage() {
+function contactsPage() {
   const body = `<section class="page-hero" style="--hero-image:url('${mediaSrc(images.hangar)}')">
     <div class="container">
-      ${breadcrumbs([{ name: "Главная", path: "/" }, { name: "Портфолио и контакты", path: "/portfolio.html" }])}
-      <span class="eyebrow">Портфолио и контакты</span>
-      <h1>Кейсы пескоструйной очистки и заявка на расчет</h1>
-      <p class="lead">Металлоконструкции, кирпичные фасады, деревянные дома, ангары, заборы и высотные работы по Москве и Московской области.</p>
+      ${breadcrumbs([{ name: "Главная", path: "/" }, { name: "Контакты", path: "/contacts.html" }])}
+      <span class="eyebrow">Контакты</span>
+      <h1>Контакты и заявка на расчет</h1>
+      <p class="lead">Присылайте фото объекта, материал и город — рассчитаем пескоструйные работы по Москве и Московской области.</p>
     </div>
   </section>
-  ${casesSection()}
-  ${reviewsSection()}
-  ${geographySection()}
-  ${contactCta("Портфолио и контакты")}`;
+  <section class="section" id="contacts">
+    <div class="container">
+      <div class="contacts-layout">
+        <article class="card card-pad contact-info-card">
+          <span class="eyebrow">Связаться</span>
+          <h2>Техочистка</h2>
+          <div class="contact-lines">
+            <a href="${phoneHref}"><strong>Телефон</strong><span>${phone}</span></a>
+            <a href="mailto:${email}"><strong>Email</strong><span>${email}</span></a>
+            <div><strong>Адрес</strong><span>${fullAddress}</span></div>
+            <div><strong>Выезд</strong><span>Москва и Московская область</span></div>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="${phoneHref}">Позвонить</a>
+            <a class="button button-secondary" href="${whatsappHref}" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </article>
+        <article class="card map-card">
+          <div class="map-frame">
+            <iframe
+              title="Карта проезда: Москва, 32-й км МКАД, владение 15"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=37.5845%2C55.5685%2C37.6120%2C55.5814&layer=mapnik&marker=${mapLat}%2C${mapLng}"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="map-actions">
+            <div>
+              <h3>Карта заезда</h3>
+              <p class="muted">${fullAddress}</p>
+            </div>
+            <div class="map-buttons">
+              <a class="button button-dark" href="${yandexRouteUrl}" target="_blank" rel="noopener">Маршрут в Яндекс</a>
+              <a class="button button-secondary" href="${googleRouteUrl}" target="_blank" rel="noopener">Маршрут в Google</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  ${contactCta("Контакты")}`;
 
   return layout({
-    title: "Портфолио и контакты",
-    description: "Портфолио Техочистка: пескоструй металла, очистка фасада и кирпича, пескоструй дерева. Контакты и форма заявки с загрузкой фото объекта.",
-    keywords: "пескоструй портфолио, пескоструй контакты, пескоструй Московская область",
-    pagePath: "/portfolio.html",
-    current: "portfolio",
-    schemas: [breadcrumbSchema([{ name: "Главная", path: "/" }, { name: "Портфолио и контакты", path: "/portfolio.html" }])],
+    title: "Контакты",
+    description: "Контакты Техочистка: телефон, email, адрес Москва, 32-й км МКАД, владение 15, карта заезда и форма заявки на расчет пескоструйных работ.",
+    keywords: "пескоструй контакты, пескоструй Москва, пескоструй Московская область",
+    pagePath: "/contacts.html",
+    current: "contacts",
+    schemas: [breadcrumbSchema([{ name: "Главная", path: "/" }, { name: "Контакты", path: "/contacts.html" }])],
     body,
   });
+}
+
+function legacyPortfolioRedirectPage() {
+  const body = `<section class="page-hero" style="--hero-image:url('${mediaSrc(images.hangar)}')">
+    <div class="container">
+      <span class="eyebrow">Контакты</span>
+      <h1>Раздел переехал</h1>
+      <p class="lead">Портфолио убрано из навигации. Контакты, карта заезда и форма заявки доступны на странице контактов.</p>
+      <div class="hero-actions"><a class="button button-primary" href="${sitePath("/contacts.html")}">Перейти в контакты</a></div>
+    </div>
+  </section>`;
+
+  return layout({
+    title: "Контакты",
+    description: "Контакты Техочистка.",
+    keywords: "контакты Техочистка",
+    pagePath: "/portfolio.html",
+    robots: "noindex, follow",
+    body,
+  }).replace("</head>", `  <meta http-equiv="refresh" content="0; url=${sitePath("/contacts.html")}">\n</head>`);
 }
 
 function cityPage(city) {
@@ -752,7 +812,7 @@ function thanksPage() {
       <span class="eyebrow">Спасибо</span>
       <h1>Заявка отправлена</h1>
       <p class="lead">Мы свяжемся с вами для уточнения объекта, площади и технологии пескоструйной обработки.</p>
-      <div class="hero-actions"><a class="button button-primary" href="${sitePath("/")}">Вернуться на главную</a><a class="button button-secondary" href="${sitePath("/portfolio.html")}">Посмотреть кейсы</a></div>
+      <div class="hero-actions"><a class="button button-primary" href="${sitePath("/")}">Вернуться на главную</a><a class="button button-secondary" href="${sitePath("/contacts.html")}">Контакты</a></div>
     </div>
   </section>`;
 
@@ -791,12 +851,13 @@ if (fs.existsSync(sourceAssets)) {
   fs.cpSync(sourceAssets, path.join(dist, "assets"), { recursive: true });
 }
 
-const htmlPaths = ["/", ...services.map((service) => service.path), "/portfolio.html", ...cities.map((city) => city.path), "/thanks.html"];
-const indexedPaths = htmlPaths.filter((pagePath) => pagePath !== "/thanks.html");
+const htmlPaths = ["/", ...services.map((service) => service.path), "/contacts.html", "/portfolio.html", ...cities.map((city) => city.path), "/thanks.html"];
+const indexedPaths = htmlPaths.filter((pagePath) => !["/thanks.html", "/portfolio.html"].includes(pagePath));
 
 write("index.html", homePage());
 services.forEach((service) => write(service.path.slice(1), servicePage(service)));
-write("portfolio.html", portfolioPage());
+write("contacts.html", contactsPage());
+write("portfolio.html", legacyPortfolioRedirectPage());
 cities.forEach((city) => write(city.path.slice(1), cityPage(city)));
 write("thanks.html", thanksPage());
 write("sitemap.xml", sitemap(indexedPaths));

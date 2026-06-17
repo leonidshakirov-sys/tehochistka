@@ -10,6 +10,6 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[redirects]]
-  from = "/contacts.html"
-  to = "/portfolio.html"
+  from = "/portfolio.html"
+  to = "/contacts.html"
   status = 301

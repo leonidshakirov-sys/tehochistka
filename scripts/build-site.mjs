@@ -365,15 +365,28 @@ function servicesSection() {
   </section>`;
 }
 
-function beforeAfterSection() {
-  const projects = [
-    {
+function beforeAfterSection(type = "metal") {
+  const projectsByType = {
+    metal: {
       title: "Металлоконструкция на открытой площадке",
       comparison: images.projectMetalComparison,
       comparisonAlt: "Сравнение до и после пескоструйной очистки стальной двутавровой балки в одном ракурсе",
       result: "Фиксируем объект до начала работ и после очистки. Такой формат показывает реальный результат по металлу, а не абстрактную текстуру.",
     },
-  ];
+    facades: {
+      title: "Кирпичный фасад после очистки",
+      comparison: "/assets/review-facade-before-after.png",
+      comparisonAlt: "Сравнение до и после абразивной очистки кирпичного фасада",
+      result: "Показываем загрязненный участок фасада и результат после аккуратной абразивной очистки кирпича, бетона или штукатурки.",
+    },
+    wood: {
+      title: "Деревянный фасад после мягкой очистки",
+      comparison: "/assets/review-wood-before-after.png",
+      comparisonAlt: "Сравнение до и после мягкой абразивной очистки деревянного фасада",
+      result: "Показываем переход от серой выветренной древесины к чистой натуральной фактуре после бережной обработки.",
+    },
+  };
+  const projects = [projectsByType[type] || projectsByType.metal];
 
   return `<section class="section" id="before-after">
     <div class="container">
@@ -621,7 +634,7 @@ function servicePage(service) {
     </div>
   </section>
   ${pricesSection()}
-  ${beforeAfterSection()}
+  ${beforeAfterSection(service.slug)}
   ${contactCta(service.title)}`;
 
   return layout({

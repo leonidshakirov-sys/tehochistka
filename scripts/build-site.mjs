@@ -36,7 +36,7 @@ const images = {
   after: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
   projectMetalBefore: "/assets/metal-before-sandblasting-structure.png",
   projectMetalAfter: "/assets/metal-after-sandblasting-structure.png",
-  projectMetalComparison: "/assets/i-beam-before-after-sandblasting.png",
+  projectMetalComparison: "/assets/i-beam-before-after-same-object.png",
 };
 
 const cities = [

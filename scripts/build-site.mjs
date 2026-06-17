@@ -36,6 +36,7 @@ const images = {
   after: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
   projectMetalBefore: "/assets/metal-before-sandblasting-structure.png",
   projectMetalAfter: "/assets/metal-after-sandblasting-structure.png",
+  projectMetalComparison: "/assets/metal-before-after-same-angle.png",
 };
 
 const cities = [
@@ -368,10 +369,8 @@ function beforeAfterSection() {
   const projects = [
     {
       title: "Металлоконструкция на открытой площадке",
-      before: images.projectMetalBefore,
-      beforeAlt: "Металлическая конструкция до пескоструйной обработки: темный металл, коррозия и загрязнение",
-      after: images.projectMetalAfter,
-      afterAlt: "Металлическая поверхность после пескоструйной обработки и подготовки под грунт",
+      comparison: images.projectMetalComparison,
+      comparisonAlt: "Сравнение до и после пескоструйной очистки одной металлоконструкции в одном ракурсе",
       result: "Фиксируем объект до начала работ и после очистки. Такой формат показывает реальный результат по металлу, а не абстрактную текстуру.",
     },
   ];
@@ -387,10 +386,11 @@ function beforeAfterSection() {
             <h3>${project.title}</h3>
             <p>${project.result}</p>
           </div>
-          <div class="before-after">
-            <figure><img src="${mediaSrc(project.before)}" alt="${project.beforeAlt}" loading="lazy"><figcaption>До пескоструя</figcaption></figure>
-            <figure><img src="${mediaSrc(project.after)}" alt="${project.afterAlt}" loading="lazy"><figcaption>После обработки</figcaption></figure>
-          </div>
+          <figure class="before-after-comparison">
+            <img src="${mediaSrc(project.comparison)}" alt="${project.comparisonAlt}" loading="lazy">
+            <span class="before-label">До пескоструя</span>
+            <span class="after-label">После обработки</span>
+          </figure>
         </article>`).join("")}
       </div>
     </div>

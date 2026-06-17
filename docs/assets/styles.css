@@ -536,33 +536,40 @@ h3 {
   color: var(--muted);
 }
 
-.before-after {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.before-after figure {
+.before-after-comparison {
   position: relative;
   margin: 0;
-  min-height: 520px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 22px;
   background: #0a0d12;
 }
 
-.before-after img {
+.before-after-comparison::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 2;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 0 26px rgba(0, 0, 0, 0.62);
+}
+
+.before-after-comparison img {
   width: 100%;
-  height: 100%;
+  height: min(58vw, 620px);
+  min-height: 430px;
   object-fit: cover;
   object-position: center;
 }
 
-.before-after figcaption {
+.before-label,
+.after-label {
   position: absolute;
-  left: 18px;
   top: 18px;
+  z-index: 3;
   padding: 10px 14px;
   border-radius: 999px;
   background: rgba(7, 9, 12, 0.84);
@@ -571,7 +578,12 @@ h3 {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
 }
 
-.before-after figure:last-child figcaption {
+.before-label {
+  left: 18px;
+}
+
+.after-label {
+  right: 18px;
   background: rgba(255, 122, 26, 0.92);
   color: #140901;
 }
@@ -963,7 +975,6 @@ h3 {
   .grid-3,
   .grid-4,
   .before-after-title,
-  .before-after,
   .price-row {
     grid-template-columns: 1fr;
   }
@@ -972,8 +983,9 @@ h3 {
     padding: 16px;
   }
 
-  .before-after figure {
-    min-height: 390px;
+  .before-after-comparison img {
+    height: 430px;
+    min-height: 430px;
   }
 
   .section {

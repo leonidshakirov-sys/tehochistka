@@ -26,7 +26,7 @@ const fullAddress = `${addressLocality}, ${streetAddress}`;
 const images = {
   hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
   metal: "/assets/metal-sandblasting-industrial.png",
-  facade: "https://images.unsplash.com/photo-1780849328094-228dc15a6e10?auto=format&fit=crop&w=1200&q=82",
+  facade: "/assets/facade-brick-abrasive-cleaning.png",
   wood: "https://images.unsplash.com/photo-1777728868180-dbfc61eef59f?auto=format&fit=crop&w=1200&q=82",
   hangar: "https://images.unsplash.com/photo-1759310347407-b0dbfeb8745d?auto=format&fit=crop&w=1200&q=82",
   fence: "https://images.unsplash.com/photo-1712730160061-c64647e6c93c?auto=format&fit=crop&w=1200&q=82",
@@ -74,7 +74,7 @@ const services = [
     nav: "Фасады",
     path: "/services/facades.html",
     image: images.facade,
-    imageAlt: "Рабочий в защитной экипировке у кирпичного фасада и строительных лесов",
+    imageAlt: "Профессиональная абразивная очистка кирпичного и бетонного фасада коммерческого здания",
     description: "Аккуратная абразивная очистка кирпича, бетона, натурального камня и промышленных фасадов.",
     keywords: "очистка фасада, очистка кирпича, пескоструй Чехов, пескоструй Домодедово",
     bullets: ["снятие высолов, сажи, краски и цементного налета", "работа на высоте и локальная защита окон", "подбор фракции под состояние кладки"],

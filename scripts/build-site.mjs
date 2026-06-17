@@ -31,7 +31,7 @@ const images = {
   hangar: "https://images.unsplash.com/photo-1759310347407-b0dbfeb8745d?auto=format&fit=crop&w=1200&q=82",
   fence: "https://images.unsplash.com/photo-1712730160061-c64647e6c93c?auto=format&fit=crop&w=1200&q=82",
   height: "https://images.unsplash.com/photo-1777984947115-05de206fd91d?auto=format&fit=crop&w=1200&q=82",
-  compressor: "https://commons.wikimedia.org/wiki/Special:FilePath/Atlas_Copco_XAHS_347-pic1.jpg",
+  compressor: "/assets/sandblasting-compressor-equipment-no-logo.png",
   before: "https://images.unsplash.com/photo-1770208742346-e8bc33802d04?auto=format&fit=crop&w=1000&q=82",
   after: "https://images.unsplash.com/photo-1674471361410-99b7cbb8ffda?auto=format&fit=crop&w=1000&q=82",
   projectMetalBefore: "/assets/metal-before-sandblasting-structure.png",
@@ -413,7 +413,7 @@ function equipmentSection() {
   return `<section class="section" id="equipment">
     <div class="container">
       <div class="equipment-strip">
-        <div class="card media-card"><img src="${mediaSrc(images.compressor)}" alt="Передвижной строительный компрессор Atlas Copco для пескоструйных работ" loading="lazy"></div>
+        <div class="card media-card"><img src="${mediaSrc(images.compressor)}" alt="Передвижной компрессор и пескоструйный аппарат без сторонних логотипов" loading="lazy"></div>
         <div class="card card-pad">
           <span class="eyebrow">Оборудование</span>
           <h2>Компрессоры, пескоструйные аппараты и защита зоны работ</h2>
@@ -436,7 +436,7 @@ function casesSection() {
     ["Деревянный дом", images.wood, "Бережная очистка деревянного фасада с проявлением натуральной фактуры", "Мягкая абразивная очистка убирает серый выветренный слой и раскрывает теплую текстуру дерева без грубого повреждения поверхности."],
     ["Ангар и склад", images.hangar, "Промышленное здание с металлическим сайдингом", "Пример промышленного здания, где очищают металлические элементы, ворота, фермы и фасадные участки."],
     ["Работа на высоте", images.height, "Рабочий на строительных лесах у фасада", "Фото показывает высотный доступ у фасада: такие работы требуют лесов, страховки и защиты зоны вокруг."],
-    ["Оборудование", images.compressor, "Передвижной строительный компрессор Atlas Copco", "Для пескоструя на объекте нужен производительный компрессор, рукава и аппарат напорного типа."],
+    ["Оборудование", images.compressor, "Передвижной компрессор и пескоструйный аппарат без сторонних логотипов", "Для пескоструя на объекте нужен производительный компрессор, рукава и аппарат напорного типа."],
   ];
   return `<section class="section" id="cases">
     <div class="container">

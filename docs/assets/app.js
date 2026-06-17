@@ -1,5 +1,6 @@
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const menu = document.querySelector("[data-menu]");
+const siteHeader = document.querySelector(".site-header");
 
 if (menuToggle && menu) {
   menuToggle.addEventListener("click", () => {
@@ -13,6 +14,35 @@ if (menuToggle && menu) {
       menuToggle.setAttribute("aria-expanded", "false");
     }
   });
+}
+
+if (siteHeader) {
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  const updateHeaderVisibility = () => {
+    const currentScrollY = window.scrollY;
+    const isMenuOpen = menu?.classList.contains("is-open");
+
+    if (isMenuOpen || currentScrollY < 120 || currentScrollY < lastScrollY) {
+      siteHeader.classList.remove("is-hidden");
+    } else if (currentScrollY > lastScrollY + 8) {
+      siteHeader.classList.add("is-hidden");
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      window.requestAnimationFrame(updateHeaderVisibility);
+      ticking = true;
+    },
+    { passive: true },
+  );
 }
 
 document.querySelectorAll('input[type="file"]').forEach((input) => {

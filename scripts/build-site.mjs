@@ -451,14 +451,58 @@ function casesSection() {
 
 function reviewsSection() {
   const reviews = [
-    ["Производственный цех", "Бригада очистила фермы и колонны перед окраской. Смету сделали по фото, на объекте подтвердили объем и уложились в согласованный режим."],
-    ["Частный дом", "Снимали старую краску со сруба. Дерево не порвали, фактура стала ровной, мастера подсказали дальнейшую обработку маслом."],
-    ["Кирпичный фасад", "После очистки ушли высолы и пятна от раствора. Аккуратно закрыли окна и отработали проблемные зоны на высоте."],
+    {
+      category: "Металл",
+      title: "Производственный цех",
+      image: "/assets/review-metal-before-after.png",
+      alt: "До и после пескоструйной очистки металлоконструкций производственного цеха",
+      quote: "Очистили фермы и балки без лишней суеты. После пескоструя грунт лег ровно, маляры сразу сказали, что на подготовке сэкономили время.",
+      author: "Алексей, производственный объект",
+    },
+    {
+      category: "Дерево",
+      title: "Частный дом",
+      image: "/assets/review-wood-before-after.png",
+      alt: "До и после мягкой абразивной очистки деревянного дома",
+      quote: "Сруб стал заметно светлее, фактура дерева раскрылась без задиров. Работали аккуратно, рядом с окнами и террасой ничего не повредили.",
+      author: "Ирина, деревянный дом",
+    },
+    {
+      category: "Фасад",
+      title: "Кирпичный фасад",
+      image: "/assets/review-facade-before-after.png",
+      alt: "До и после абразивной очистки кирпичного фасада",
+      quote: "Убрали высолы и старые пятна на кирпиче. Зону закрыли, после работ не пришлось переделывать отмостку и окна — все оставили чисто.",
+      author: "Дмитрий, фасад дома",
+    },
   ];
-  return `<section class="section" id="reviews">
+  return `<section class="section reviews-section" id="reviews">
     <div class="container">
-      <div class="section-head"><div><span class="eyebrow">Отзывы</span><h2>Клиенты ценят аккуратность на объекте</h2></div></div>
-      <div class="grid grid-3">${reviews.map(([name, text]) => `<article class="card card-pad review-card"><h3>${name}</h3><p>${text}</p></article>`).join("")}</div>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Отзывы клиентов</span>
+          <h2>Что говорят клиенты после работ</h2>
+          <p>Показываем реальный объект, фото и слова заказчика.</p>
+        </div>
+        <div class="review-controls" aria-label="Навигация по отзывам">
+          <button class="slider-button" type="button" aria-label="Предыдущий отзыв" data-review-prev>←</button>
+          <button class="slider-button" type="button" aria-label="Следующий отзыв" data-review-next>→</button>
+        </div>
+      </div>
+      <div class="review-slider" data-review-slider>
+        ${reviews.map((review, index) => `<article class="card review-case" data-review-slide>
+          <div class="review-image-wrap">
+            <img src="${mediaSrc(review.image)}" alt="${review.alt}" loading="lazy">
+          </div>
+          <div class="review-content">
+            <span class="review-badge">${review.category}</span>
+            <h3>${review.title}</h3>
+            <blockquote>«${review.quote}»</blockquote>
+            <p class="review-author">${review.author}</p>
+          </div>
+        </article>`).join("")}
+      </div>
+      <div class="review-dots" aria-label="Отзывы">${reviews.map((review, index) => `<button type="button" aria-label="Показать отзыв ${index + 1}" data-review-dot="${index}" ${index === 0 ? 'aria-current="true"' : ""}></button>`).join("")}</div>
     </div>
   </section>`;
 }

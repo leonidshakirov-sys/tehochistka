@@ -22,8 +22,13 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container">
+    <section class="hero hero-photo">
+      <div class="hero-bg">
+        <img src="./assets/hero.jpg" alt="Площадка Сфера Авто на 32 км МКАД: парковка и эстакада">
+        <span class="pin" style="top:16%;left:52%">МКАД</span>
+        <span class="pin" style="top:24%;left:74%">Варшавское шоссе</span>
+      </div>
+      <div class="container hero-copy">
         <span class="eyebrow">Площадка под парковку · от собственника</span>
         <h1>2500 м² на первой линии МКАД</h1>
         <p class="lead">Сдаём площадку под парковку коммерческого транспорта, фур и легковых автомобилей. 32-й км МКАД, владение 15 — рядом с Варшавским шоссе. Можно снять часть площади.</p>
@@ -48,27 +53,59 @@
           <p class="muted">Адрес: Москва, 32-й км МКАД, владение 15. Территория «Сфера Авто». Удобный заезд для фур и коммерческого транспорта.</p>
         </div>
         <div class="grid grid-2">
-          <article class="card scheme">
-            <svg viewBox="0 0 760 460" role="img" aria-label="Схема: площадка на первой линии МКАД и Варшавского шоссе">
-              <rect width="760" height="460" fill="#10141a"/>
-              <rect x="40" y="48" width="680" height="86" rx="18" fill="#2b3340"/>
-              <rect x="40" y="70" width="680" height="18" fill="#ffb020"/>
-              <rect x="40" y="94" width="680" height="8" fill="#dfe6ef" opacity="0.35"/>
-              <text x="58" y="42" fill="#ffc857" font-size="22" font-family="Arial" font-weight="700">↑ МКАД</text>
-              <polygon points="620,36 700,58 620,80" fill="#ffb020"/>
-              <rect x="40" y="168" width="54" height="230" rx="12" fill="#3a4454"/>
-              <rect x="58" y="168" width="8" height="230" fill="#ffb020"/>
-              <text x="28" y="410" fill="#ffc857" font-size="18" font-family="Arial" font-weight="700" transform="rotate(-90 48 360)">Варшавское шоссе</text>
-              <polygon points="28,250 52,210 76,250" fill="#ffb020"/>
-              <rect x="130" y="176" width="560" height="214" rx="22" fill="#1c242e" stroke="#ffb020" stroke-width="3"/>
-              <text x="160" y="230" fill="#f4f6f8" font-size="28" font-family="Arial" font-weight="700">Площадка 2500 м²</text>
-              <text x="160" y="268" fill="#ffc857" font-size="22" font-family="Arial" font-weight="700">Сфера Авто · 1-я линия</text>
-              <text x="160" y="304" fill="#a8b0bb" font-size="18" font-family="Arial">32-й км МКАД, владение 15</text>
-              <text x="160" y="338" fill="#a8b0bb" font-size="16" font-family="Arial">охрана · освещение · заезд для фур</text>
-            </svg>
+          <article class="card photo-pin">
+            <img src="./assets/lot-mkad.jpg" alt="Площадка 2500 м² на первой линии у эстакады МКАД">
+            <span class="pin" style="top:18%;left:38%">МКАД</span>
+            <span class="pin" style="top:32%;left:72%">Варшавское шоссе</span>
           </article>
           <article class="card map-frame">
             <iframe title="Карта площадки на 32 км МКАД" src="https://yandex.ru/map-widget/v1/?ll=37.59822%2C55.57495&z=16&pt=37.59822,55.57495,pm2rdm&l=map" loading="lazy"></iframe>
+          </article>
+        </div>
+        <div class="gallery" style="margin-top:16px">
+          <article class="card photo-pin">
+            <img src="./assets/first-line.jpg" alt="Первая линия: площадка у МКАД и пешеходного перехода">
+            <span class="pin" style="top:28%;left:18%">МКАД</span>
+            <span class="pin" style="top:22%;left:62%">Варшавское шоссе</span>
+          </article>
+          <article class="card photo-pin">
+            <img src="./assets/building.jpg" alt="Здание Сфера Авто и эстакада МКАД">
+            <span class="pin" style="top:28%;left:68%">МКАД</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="photos">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Фото объекта</span>
+          <h2>Площадка, въезд и здание Сфера Авто</h2>
+        </div>
+        <div class="gallery">
+          <article class="card photo-pin">
+            <img src="./assets/trucks.jpg" alt="Парковка фур и коммерческого транспорта у эстакады МКАД">
+            <span class="pin" style="top:16%;left:42%">МКАД</span>
+          </article>
+          <article class="card photo-pin">
+            <img src="./assets/overpass.jpg" alt="Открытая площадка 2500 м² под эстакадой">
+            <span class="pin" style="top:18%;left:48%">МКАД</span>
+          </article>
+          <article class="card photo-pin">
+            <img src="./assets/entrance.jpg" alt="Въезд на охраняемую территорию">
+            <span class="pin" style="top:22%;left:46%">МКАД</span>
+          </article>
+          <article class="card photo-pin">
+            <img src="./assets/security.jpg" alt="Охрана и шлагбаум на въезде">
+          </article>
+          <article class="card photo-pin">
+            <img src="./assets/address.jpg" alt="Адрес: 32 км МКАД, владение 15, Сфера Авто">
+            <span class="pin" style="top:30%;left:8%">МКАД</span>
+          </article>
+          <article class="card photo-pin">
+            <img src="./assets/access.jpg" alt="Выезд на первую линию к МКАД">
+            <span class="pin" style="top:36%;left:48%">МКАД</span>
+            <span class="pin" style="top:42%;left:70%">Варшавское шоссе</span>
           </article>
         </div>
       </div>

@@ -327,7 +327,7 @@ function leadForm(context = "Общая заявка") {
     .replaceAll(/[^a-zа-яё0-9]+/giu, "-")
     .replaceAll(/^-|-$/g, "");
 
-  return `<form class="form-grid" name="lead" method="POST" action="https://formsubmit.co/${email}" enctype="multipart/form-data" data-lead-form>
+  return `<form class="form-grid" name="lead" method="POST" action="https://formsubmit.co/${email}" enctype="multipart/form-data" data-lead-form data-whatsapp-url="${whatsappHref}">
     <input type="hidden" name="_subject" value="Новая заявка с сайта Техочистка">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">

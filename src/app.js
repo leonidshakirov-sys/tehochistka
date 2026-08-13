@@ -59,12 +59,34 @@ document.querySelectorAll('input[type="file"]').forEach((input) => {
 });
 
 document.querySelectorAll("[data-lead-form]").forEach((form) => {
-  form.addEventListener("submit", () => {
-    const button = form.querySelector('button[type="submit"]');
-    if (!button) return;
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-    button.textContent = "Отправляем...";
-    button.setAttribute("aria-busy", "true");
+    const button = form.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
+    const whatsappUrl = form.getAttribute("data-whatsapp-url") || "https://wa.me/79162659262";
+    const fileInput = form.querySelector('input[type="file"]');
+    const selectedFile = fileInput?.files?.[0]?.name;
+    const message = [
+      "Заявка с сайта Техочистка",
+      `Страница: ${formData.get("page") || "не указана"}`,
+      `Имя: ${formData.get("name") || "не указано"}`,
+      `Телефон: ${formData.get("phone") || "не указан"}`,
+      `Комментарий: ${formData.get("message") || "без комментария"}`,
+      selectedFile ? `Фото: выбрано "${selectedFile}". Пожалуйста, прикрепите файл в этом чате.` : "Фото: не приложено",
+    ].join("\n");
+
+    if (button) {
+      button.textContent = "Открываем WhatsApp...";
+      button.setAttribute("aria-busy", "true");
+    }
+
+    const targetUrl = `${whatsappUrl}?text=${encodeURIComponent(message)}`;
+    const openedWindow = window.open(targetUrl, "_blank", "noopener");
+
+    if (!openedWindow) {
+      window.location.href = targetUrl;
+    }
   });
 });
 

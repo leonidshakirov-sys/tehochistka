@@ -10,6 +10,7 @@
   - `/services/facades.html`
   - `/services/wood.html`
 - Страница «Портфолио и контакты»: `/portfolio.html`.
+- Политика конфиденциальности: `/privacy.html`.
 - Отдельные SEO-страницы городов в `/cities/`.
 - Schema.org микроразметка: `LocalBusiness`, `Service`, `FAQPage`, `BreadcrumbList`.
 - `sitemap.xml`, `robots.txt`, canonical URL, Open Graph и Twitter Card.

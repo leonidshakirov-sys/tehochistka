@@ -937,6 +937,12 @@ h3 {
   font-weight: 800;
 }
 
+.field-label {
+  color: #dce2ec;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 .field input,
 .field textarea,
 .field select {
@@ -978,6 +984,28 @@ h3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+.messenger-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.messenger-choice label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.messenger-choice input {
+  accent-color: var(--orange);
 }
 
 .form-note {

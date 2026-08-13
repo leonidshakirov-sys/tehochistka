@@ -65,6 +65,8 @@ document.querySelectorAll("[data-lead-form]").forEach((form) => {
     const button = form.querySelector('button[type="submit"]');
     const formData = new FormData(form);
     const whatsappUrl = form.getAttribute("data-whatsapp-url") || "https://wa.me/79162659262";
+    const telegramUrl = form.getAttribute("data-telegram-url") || "https://t.me/mrShla";
+    const messenger = formData.get("messenger") || "whatsapp";
     const fileInput = form.querySelector('input[type="file"]');
     const selectedFile = fileInput?.files?.[0]?.name;
     const message = [
@@ -77,11 +79,18 @@ document.querySelectorAll("[data-lead-form]").forEach((form) => {
     ].join("\n");
 
     if (button) {
-      button.textContent = "Открываем WhatsApp...";
+      button.textContent = messenger === "telegram" ? "Открываем Telegram..." : "Открываем WhatsApp...";
       button.setAttribute("aria-busy", "true");
     }
 
-    const targetUrl = `${whatsappUrl}?text=${encodeURIComponent(message)}`;
+    if (messenger === "telegram" && navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(message).catch(() => {});
+    }
+
+    const targetUrl =
+      messenger === "telegram"
+        ? telegramUrl
+        : `${whatsappUrl}?text=${encodeURIComponent(message)}`;
     const openedWindow = window.open(targetUrl, "_blank", "noopener");
 
     if (!openedWindow) {

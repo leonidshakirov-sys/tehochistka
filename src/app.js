@@ -66,7 +66,6 @@ document.querySelectorAll("[data-lead-form]").forEach((form) => {
     const formData = new FormData(form);
     const whatsappUrl = form.getAttribute("data-whatsapp-url") || "https://wa.me/79162659262";
     const telegramUrl = form.getAttribute("data-telegram-url") || "https://t.me/mrShla";
-    const maxUrl = form.getAttribute("data-max-url") || "https://max.ru/:share";
     const messenger = formData.get("messenger") || "whatsapp";
     const fileInput = form.querySelector('input[type="file"]');
     const selectedFile = fileInput?.files?.[0]?.name;
@@ -83,9 +82,7 @@ document.querySelectorAll("[data-lead-form]").forEach((form) => {
       button.textContent =
         messenger === "telegram"
           ? "Открываем Telegram..."
-          : messenger === "max"
-            ? "Открываем MAX..."
-            : "Открываем WhatsApp...";
+          : "Открываем WhatsApp...";
       button.setAttribute("aria-busy", "true");
     }
 
@@ -96,9 +93,7 @@ document.querySelectorAll("[data-lead-form]").forEach((form) => {
     const targetUrl =
       messenger === "telegram"
         ? telegramUrl
-        : messenger === "max"
-          ? `${maxUrl}?text=${encodeURIComponent(message)}`
-          : `${whatsappUrl}?text=${encodeURIComponent(message)}`;
+        : `${whatsappUrl}?text=${encodeURIComponent(message)}`;
     const openedWindow = window.open(targetUrl, "_blank", "noopener");
 
     if (!openedWindow) {

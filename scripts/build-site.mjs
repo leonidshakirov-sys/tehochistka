@@ -20,7 +20,6 @@ const phone = "+7 (916) 265-92-62";
 const phoneHref = "tel:+79162659262";
 const whatsappHref = "https://wa.me/79162659262";
 const telegramHref = "https://t.me/mrShla";
-const maxShareHref = "https://max.ru/:share";
 const email = "tehochistka@mail.ru";
 const streetAddress = "32-й км МКАД, владение 15";
 const addressLocality = "Москва";
@@ -329,7 +328,7 @@ function leadForm(context = "Общая заявка") {
     .replaceAll(/[^a-zа-яё0-9]+/giu, "-")
     .replaceAll(/^-|-$/g, "");
 
-  return `<form class="form-grid" name="lead" method="POST" action="https://formsubmit.co/${email}" enctype="multipart/form-data" data-lead-form data-whatsapp-url="${whatsappHref}" data-telegram-url="${telegramHref}" data-max-url="${maxShareHref}">
+  return `<form class="form-grid" name="lead" method="POST" action="https://formsubmit.co/${email}" enctype="multipart/form-data" data-lead-form data-whatsapp-url="${whatsappHref}" data-telegram-url="${telegramHref}">
     <input type="hidden" name="_subject" value="Новая заявка с сайта Техочистка">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
@@ -358,7 +357,6 @@ function leadForm(context = "Общая заявка") {
       <div class="messenger-choice">
         <label><input type="radio" name="messenger" value="whatsapp" checked> WhatsApp</label>
         <label><input type="radio" name="messenger" value="telegram"> Telegram</label>
-        <label><input type="radio" name="messenger" value="max"> MAX</label>
       </div>
     </div>
     <div class="form-actions">

@@ -20,6 +20,7 @@ const phone = "+7 (916) 265-92-62";
 const phoneHref = "tel:+79162659262";
 const whatsappHref = "https://wa.me/79162659262";
 const telegramHref = "https://t.me/mrShla";
+const maxShareHref = "https://max.ru/:share";
 const email = "tehochistka@mail.ru";
 const streetAddress = "32-й км МКАД, владение 15";
 const addressLocality = "Москва";
@@ -328,7 +329,7 @@ function leadForm(context = "Общая заявка") {
     .replaceAll(/[^a-zа-яё0-9]+/giu, "-")
     .replaceAll(/^-|-$/g, "");
 
-  return `<form class="form-grid" name="lead" method="POST" action="https://formsubmit.co/${email}" enctype="multipart/form-data" data-lead-form data-whatsapp-url="${whatsappHref}" data-telegram-url="${telegramHref}">
+  return `<form class="form-grid" name="lead" method="POST" action="https://formsubmit.co/${email}" enctype="multipart/form-data" data-lead-form data-whatsapp-url="${whatsappHref}" data-telegram-url="${telegramHref}" data-max-url="${maxShareHref}">
     <input type="hidden" name="_subject" value="Новая заявка с сайта Техочистка">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
@@ -346,7 +347,7 @@ function leadForm(context = "Общая заявка") {
     <div class="field">
       <label for="photo-${fieldId}">Загрузить фото объекта</label>
       <input id="photo-${fieldId}" name="attachment" type="file" accept="image/*">
-      <small class="muted" data-file-note>Приложите одно фото до 5 МБ. Если фото тяжелое, отправьте его в WhatsApp.</small>
+      <small class="muted" data-file-note>Приложите одно фото до 5 МБ. Если фото тяжелое, отправьте его в выбранный мессенджер.</small>
     </div>
     <div class="field">
       <label for="message-${fieldId}">Комментарий</label>
@@ -357,6 +358,7 @@ function leadForm(context = "Общая заявка") {
       <div class="messenger-choice">
         <label><input type="radio" name="messenger" value="whatsapp" checked> WhatsApp</label>
         <label><input type="radio" name="messenger" value="telegram"> Telegram</label>
+        <label><input type="radio" name="messenger" value="max"> MAX</label>
       </div>
     </div>
     <div class="form-actions">
@@ -619,7 +621,7 @@ function homePage() {
         <div class="hero-facts">
           <div class="fact"><strong>3</strong><span>ключевых направления: металл, фасады, дерево</span></div>
           <div class="fact fact-text-only"><span>Выезд по Москве и Московской области</span></div>
-          <div class="fact"><strong>24/7</strong><span>заявки через форму или WhatsApp</span></div>
+          <div class="fact"><strong>24/7</strong><span>заявки через форму и мессенджеры</span></div>
         </div>
       </div>
       <aside class="request-card">

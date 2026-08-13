@@ -46,10 +46,16 @@ npm run build:docs
 4. В поле папки выберите `/docs`.
 5. Нажмите `Save`.
 
-После публикации сайт будет доступен по адресу:
+Сборка `docs` настроена под собственный домен и автоматически создает `docs/CNAME`:
 
 ```text
-https://leonidshakirov-sys.github.io/tehochistka/
+tehochistka.ru
+```
+
+После публикации сайт должен быть доступен по адресу:
+
+```text
+https://tehochistka.ru/
 ```
 
 Если позже будете публиковать из ветки `main`, сначала смержите PR, затем в настройках Pages выберите:
@@ -58,6 +64,27 @@ https://leonidshakirov-sys.github.io/tehochistka/
 Branch: main
 Folder: /docs
 ```
+
+### DNS для GitHub Pages
+
+Для домена `tehochistka.ru` оставьте только A-записи GitHub Pages:
+
+```text
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+
+Удалите лишние A-записи, которые ведут не на GitHub Pages.
+
+Для `www.tehochistka.ru` добавьте CNAME:
+
+```text
+leonidshakirov-sys.github.io
+```
+
+После обновления DNS в GitHub Pages включите `Enforce HTTPS`. Сертификат выпускается GitHub автоматически, но это может занять некоторое время после корректной DNS-настройки.
 
 ## Перед публикацией
 

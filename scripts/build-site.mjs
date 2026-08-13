@@ -14,6 +14,7 @@ const cliOptions = Object.fromEntries(
 const outputDir = cliOptions.output || process.env.BUILD_OUTPUT_DIR || "dist";
 const pathPrefix = (cliOptions["path-prefix"] || process.env.SITE_PATH_PREFIX || "").replace(/\/$/, "");
 const baseUrl = (cliOptions["base-url"] || process.env.SITE_BASE_URL || "https://tehochistka.ru").replace(/\/$/, "");
+const customDomain = cliOptions["custom-domain"] || process.env.SITE_CUSTOM_DOMAIN || "";
 const dist = path.join(root, outputDir);
 const phone = "+7 (916) 265-92-62";
 const phoneHref = "tel:+79162659262";
@@ -126,6 +127,28 @@ function write(filePath, content) {
   const target = path.join(dist, filePath);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.writeFileSync(target, content);
+}
+
+function cleanOutputDirectory() {
+  if (outputDir !== "docs") {
+    fs.rmSync(dist, { recursive: true, force: true });
+    return;
+  }
+
+  fs.mkdirSync(dist, { recursive: true });
+  [
+    "assets",
+    "cities",
+    "services",
+    "index.html",
+    "contacts.html",
+    "portfolio.html",
+    "thanks.html",
+    "sitemap.xml",
+    "robots.txt",
+    "CNAME",
+    ".nojekyll",
+  ].forEach((entry) => fs.rmSync(path.join(dist, entry), { recursive: true, force: true }));
 }
 
 function canonical(pagePath) {
@@ -966,7 +989,7 @@ Host: ${siteHost()}
 `;
 }
 
-fs.rmSync(dist, { recursive: true, force: true });
+cleanOutputDirectory();
 fs.mkdirSync(path.join(dist, "assets"), { recursive: true });
 fs.copyFileSync(path.join(root, "src", "styles.css"), path.join(dist, "assets", "styles.css"));
 fs.copyFileSync(path.join(root, "src", "app.js"), path.join(dist, "assets", "app.js"));
@@ -987,6 +1010,9 @@ cities.forEach((city) => write(city.path.slice(1), cityPage(city)));
 write("thanks.html", thanksPage());
 write("sitemap.xml", sitemap(indexedPaths));
 write("robots.txt", robots());
+if (customDomain) {
+  write("CNAME", `${customDomain}\n`);
+}
 
 fs.writeFileSync(path.join(dist, ".nojekyll"), "");
 

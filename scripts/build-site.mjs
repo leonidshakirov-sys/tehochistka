@@ -31,7 +31,7 @@ const mapLat = "55.57495";
 const mapLng = "37.59822";
 const yandexRouteUrl = `https://yandex.ru/maps/?rtext=~${mapLat},${mapLng}&rtt=auto`;
 const googleRouteUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapLat},${mapLng}`;
-const yandexMetrikaId = "111611815";
+const yandexMetrikaId = "111612272";
 
 const images = {
   hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",

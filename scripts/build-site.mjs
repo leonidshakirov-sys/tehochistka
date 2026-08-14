@@ -269,10 +269,7 @@ function layout({ title, description, keywords, pagePath, body, schemas = [], cu
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="${sitePath("/")}" aria-label="Техочистка">
-        <span class="brand-mark">Т</span>
-        <span>Техочистка</span>
-      </a>
+      ${brandMarkup()}
       <nav class="menu" data-menu aria-label="Основная навигация">
         <a href="${sitePath("/")}" ${current === "home" ? 'aria-current="page"' : ""}>Главная</a>
         ${services.map((service) => `<a href="${sitePath(service.path)}" ${current === service.slug ? 'aria-current="page"' : ""}>${service.nav}</a>`).join("")}
@@ -296,12 +293,19 @@ function layout({ title, description, keywords, pagePath, body, schemas = [], cu
 </html>`;
 }
 
+function brandMarkup() {
+  return `<a class="brand" href="${sitePath("/")}" aria-label="Техочистка">
+        <img class="brand-logo" src="${sitePath("/assets/tehochistka-logo.png")}" alt="" width="52" height="52">
+        <span>Техочистка</span>
+      </a>`;
+}
+
 function footer() {
   return `<footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="${sitePath("/")}"><span class="brand-mark">Т</span><span>Техочистка</span></a>
+          ${brandMarkup()}
           <p class="muted" style="margin-top:18px;max-width:520px">Пескоструйная обработка металла, очистка фасадов, кирпича и дерева с выездом по Москве и Московской области.</p>
         </div>
         <div class="footer-links">

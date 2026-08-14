@@ -31,6 +31,7 @@ const mapLat = "55.57495";
 const mapLng = "37.59822";
 const yandexRouteUrl = `https://yandex.ru/maps/?rtext=~${mapLat},${mapLng}&rtt=auto`;
 const googleRouteUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapLat},${mapLng}`;
+const yandexMetrikaId = "111611815";
 
 const images = {
   hero: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabbiatura.JPG",
@@ -264,9 +265,11 @@ function layout({ title, description, keywords, pagePath, body, schemas = [], cu
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://upload.wikimedia.org">
   <link rel="stylesheet" href="${sitePath("/assets/styles.css")}">
+  ${yandexMetrikaScript()}
   ${schemaTags}
 </head>
 <body>
+  ${yandexMetrikaNoScript()}
   <header class="site-header">
     <div class="container nav">
       ${brandMarkup()}
@@ -291,6 +294,29 @@ function layout({ title, description, keywords, pagePath, body, schemas = [], cu
   <script src="${sitePath("/assets/app.js")}" defer></script>
 </body>
 </html>`;
+}
+
+function yandexMetrikaScript() {
+  return `<!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=${yandexMetrikaId}", "ym");
+    ym(${yandexMetrikaId}, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:true
+    });
+  </script>
+  <!-- /Yandex.Metrika counter -->`;
+}
+
+function yandexMetrikaNoScript() {
+  return `<noscript><div><img src="https://mc.yandex.ru/watch/${yandexMetrikaId}" style="position:absolute; left:-9999px;" alt=""></div></noscript>`;
 }
 
 function brandMarkup() {
